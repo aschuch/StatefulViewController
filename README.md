@@ -17,7 +17,7 @@ As trivial as this flow may sound, there are a lot of edge cases that result in 
 
 /// TODO: Image of tree
 
-StatefulViewController is a concrete implementation of this particular decision tree. (If you want to create your own modified version, you might be interested in the [state machine]("#viewstatemachine") that is used to show and hide views.)
+StatefulViewController is a concrete implementation of this particular decision tree. (If you want to create your own modified version, you might be interested in the [state machine](#viewstatemachine) that is used to show and hide views.)
 
 ## Usage
 
@@ -36,7 +36,7 @@ func loadDeliciousWines() {
 }
 ```
 
-<a href="#viewstatemachine"></a>
+<a name="viewstatemachine"/>
 ### View State Machine
 
 > Note: The following section is only intended for those, who want to create a stateful controller that differs from the flow described above.
