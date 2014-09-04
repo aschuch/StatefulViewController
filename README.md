@@ -30,13 +30,23 @@ func loadDeliciousWines() {
 	startLoading()
 	
 	let url = NSURL(string: "http://example.com/api")
+	let session = NSURLSession.sharedSession()
 	let task = session.dataTaskWithURL(url) { (let data, let response, let error) in
 		endLoading(error: error)
 	}
+	task.resume()
 }
 ```
 
-<a name="viewstatemachine"/>
+`hasContent` should be overridden to indicate if there is any content to display. 
+
+```swift
+override func hasContent() -> Bool {
+	return countElements(datasourceArray) > 0
+}
+```
+
+<a name="viewstatemachine"></a>
 ### View State Machine
 
 > Note: The following section is only intended for those, who want to create a stateful controller that differs from the flow described above.
@@ -44,7 +54,21 @@ func loadDeliciousWines() {
 You can also use the underying view state machine to create a similar implementation for your custom flow of showing/hiding views.
 
 ```swift
-// TODO: code sample
+let stateMachine = ViewStateMachine(view: view)
+
+// Add states
+stateMachine["loading"] = loadingView
+stateMachine["other"] = otherView
+
+// Transition to state
+stateMachine.transitionToState(.View("loading"), animated: true) {
+	println("finished switching to loading view")
+}
+
+// Hide all views
+stateMachine.transitionToState(.None, animated: true) {
+	println("all views hidden now")
+}
 ```
 
 ## Installation
