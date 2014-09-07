@@ -2,9 +2,7 @@
 
 A view controller subclass that presents placeholder views based on content, loading, error or empty states.
 
-// TODO: Add .gifs
-
----
+<center>![Example](example.gif)</center>
 
 In a networked application a view controller typically has the following states that need to be communicated to the user:
 
