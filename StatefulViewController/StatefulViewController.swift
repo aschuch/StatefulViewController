@@ -24,7 +24,7 @@ public class StatefulViewController: UIViewController {
 	
 	/// The current state of the view controller.
 	/// All states other than `Content` imply that there is a placeholder view shown.
-	var currentState: StatefulViewControllerState {
+	public var currentState: StatefulViewControllerState {
 		switch stateMachine.currentState {
 			case .None: return .Content
 			case .View(let viewKey): return StatefulViewControllerState.fromRaw(viewKey)!
@@ -35,17 +35,17 @@ public class StatefulViewController: UIViewController {
 	// MARK: Views
 	
 	/// The loading view is shown when the `startLoading` method gets called
-	var loadingView: UIView! {
+	public var loadingView: UIView! {
 		didSet { setPlaceholderView(loadingView, forState: .Loading) }
 	}
 	
 	/// The error view is shown when the `endLoading` method returns an error
-	var errorView: UIView! {
+	public var errorView: UIView! {
 		didSet { setPlaceholderView(errorView, forState: .Error) }
 	}
 	
 	/// The empty view is shown when the `hasContent` method returns false
-	var emptyView: UIView! {
+	public var emptyView: UIView! {
 		didSet { setPlaceholderView(emptyView, forState: .Empty) }
 	}
 
@@ -133,7 +133,7 @@ extension StatefulViewController {
 	///
 	/// :returns: true if there is content available in your controller.
 	///
-	func hasContent() -> Bool { return true }
+	public func hasContent() -> Bool { return true }
 	
 	/// Can be overridden by a subclass of StatefulViewController.
 	/// This method is called if an error occured, but `hasContent` returns true.
@@ -142,5 +142,5 @@ extension StatefulViewController {
 	/// 
 	/// :param: error	The error that occured
 	///
-	func handleErrorWhenContentAvailable(error: NSError) { }
+	public func handleErrorWhenContentAvailable(error: NSError) { }
 }
