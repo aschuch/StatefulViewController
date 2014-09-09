@@ -2,7 +2,7 @@
 
 A view controller subclass that presents placeholder views based on content, loading, error or empty states.
 
-<center>![Example](example.gif)</center>
+![StatefulViewController Example](example.gif)
 
 In a networked application a view controller typically has the following states that need to be communicated to the user:
 
