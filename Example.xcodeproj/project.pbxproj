@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D137EB819C1BE5700AC1050 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D137EB619C1BE5700AC1050 /* LaunchScreen.xib */; };
 		4DE62AE219B658610021630A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE62AE119B658610021630A /* AppDelegate.swift */; };
 		4DE62AE419B658610021630A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE62AE319B658610021630A /* ViewController.swift */; };
 		4DE62AE719B658610021630A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DE62AE519B658610021630A /* Main.storyboard */; };
@@ -31,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4D137EB719C1BE5700AC1050 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		4DE62ADC19B658610021630A /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DE62AE019B658610021630A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DE62AE119B658610021630A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				4DE62AE319B658610021630A /* ViewController.swift */,
 				4DE62B0819B65AF00021630A /* PlaceholderViews */,
 				4DE62AE519B658610021630A /* Main.storyboard */,
+				4D137EB619C1BE5700AC1050 /* LaunchScreen.xib */,
 				4DE62AE819B658610021630A /* Images.xcassets */,
 				4DE62ADF19B658610021630A /* Supporting Files */,
 			);
@@ -216,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DE62AE719B658610021630A /* Main.storyboard in Resources */,
+				4D137EB819C1BE5700AC1050 /* LaunchScreen.xib in Resources */,
 				4DE62AE919B658610021630A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -264,6 +268,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		4D137EB619C1BE5700AC1050 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4D137EB719C1BE5700AC1050 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
 		4DE62AE519B658610021630A /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -356,7 +368,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -367,7 +378,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
