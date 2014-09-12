@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		4D137EB819C1BE5700AC1050 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D137EB619C1BE5700AC1050 /* LaunchScreen.xib */; };
+		4DBE1B0119C318050055BDFE /* StatefulViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBE1AFF19C318050055BDFE /* StatefulViewController.swift */; };
+		4DBE1B0219C318050055BDFE /* ViewStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBE1B0019C318050055BDFE /* ViewStateMachine.swift */; };
 		4DE62AE219B658610021630A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE62AE119B658610021630A /* AppDelegate.swift */; };
 		4DE62AE419B658610021630A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE62AE319B658610021630A /* ViewController.swift */; };
 		4DE62AE719B658610021630A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DE62AE519B658610021630A /* Main.storyboard */; };
 		4DE62AE919B658610021630A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DE62AE819B658610021630A /* Images.xcassets */; };
 		4DE62B0219B658DB0021630A /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE62B0019B658DB0021630A /* Tests.swift */; };
-		4DE62B0619B65A0F0021630A /* StatefulViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE62B0419B65A0F0021630A /* StatefulViewController.swift */; };
-		4DE62B0719B65A0F0021630A /* ViewStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE62B0519B65A0F0021630A /* ViewStateMachine.swift */; };
 		4DE62B0D19B65AF00021630A /* BasicPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE62B0919B65AF00021630A /* BasicPlaceholderView.swift */; };
 		4DE62B0E19B65AF00021630A /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE62B0A19B65AF00021630A /* EmptyView.swift */; };
 		4DE62B0F19B65AF00021630A /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE62B0B19B65AF00021630A /* ErrorView.swift */; };
@@ -33,6 +33,8 @@
 
 /* Begin PBXFileReference section */
 		4D137EB719C1BE5700AC1050 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		4DBE1AFF19C318050055BDFE /* StatefulViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatefulViewController.swift; sourceTree = "<group>"; };
+		4DBE1B0019C318050055BDFE /* ViewStateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewStateMachine.swift; sourceTree = "<group>"; };
 		4DE62ADC19B658610021630A /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DE62AE019B658610021630A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DE62AE119B658610021630A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -42,8 +44,6 @@
 		4DE62AEE19B658610021630A /* ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DE62AFF19B658DB0021630A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DE62B0019B658DB0021630A /* Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
-		4DE62B0419B65A0F0021630A /* StatefulViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatefulViewController.swift; sourceTree = "<group>"; };
-		4DE62B0519B65A0F0021630A /* ViewStateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewStateMachine.swift; sourceTree = "<group>"; };
 		4DE62B0919B65AF00021630A /* BasicPlaceholderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicPlaceholderView.swift; sourceTree = "<group>"; };
 		4DE62B0A19B65AF00021630A /* EmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		4DE62B0B19B65AF00021630A /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
@@ -68,10 +68,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4DBE1AFE19C318050055BDFE /* StatefulViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4DBE1AFF19C318050055BDFE /* StatefulViewController.swift */,
+				4DBE1B0019C318050055BDFE /* ViewStateMachine.swift */,
+			);
+			name = StatefulViewController;
+			path = Source;
+			sourceTree = "<group>";
+		};
 		4DE62AD319B658610021630A = {
 			isa = PBXGroup;
 			children = (
-				4DE62B0319B65A0F0021630A /* StatefulViewController */,
+				4DBE1AFE19C318050055BDFE /* StatefulViewController */,
 				4DE62ADE19B658610021630A /* Example */,
 				4DE62AFE19B658DB0021630A /* Tests */,
 				4DE62ADD19B658610021630A /* Products */,
@@ -116,15 +126,6 @@
 				4DE62AFF19B658DB0021630A /* Info.plist */,
 			);
 			path = Tests;
-			sourceTree = "<group>";
-		};
-		4DE62B0319B65A0F0021630A /* StatefulViewController */ = {
-			isa = PBXGroup;
-			children = (
-				4DE62B0419B65A0F0021630A /* StatefulViewController.swift */,
-				4DE62B0519B65A0F0021630A /* ViewStateMachine.swift */,
-			);
-			path = StatefulViewController;
 			sourceTree = "<group>";
 		};
 		4DE62B0819B65AF00021630A /* PlaceholderViews */ = {
@@ -240,12 +241,12 @@
 			files = (
 				4DE62AE419B658610021630A /* ViewController.swift in Sources */,
 				4DE62B0D19B65AF00021630A /* BasicPlaceholderView.swift in Sources */,
+				4DBE1B0219C318050055BDFE /* ViewStateMachine.swift in Sources */,
 				4DE62AE219B658610021630A /* AppDelegate.swift in Sources */,
-				4DE62B0719B65A0F0021630A /* ViewStateMachine.swift in Sources */,
+				4DBE1B0119C318050055BDFE /* StatefulViewController.swift in Sources */,
 				4DE62B0F19B65AF00021630A /* ErrorView.swift in Sources */,
 				4DE62B1019B65AF00021630A /* LoadingView.swift in Sources */,
 				4DE62B0E19B65AF00021630A /* EmptyView.swift in Sources */,
-				4DE62B0619B65A0F0021630A /* StatefulViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

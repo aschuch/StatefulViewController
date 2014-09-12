@@ -2,7 +2,7 @@
 
 A view controller subclass that presents placeholder views based on content, loading, error or empty states.
 
-![StatefulViewController Example](example.gif)
+![StatefulViewController Example](Resources/example.gif)
 
 In a networked application a view controller typically has the following states that need to be communicated to the user:
 
@@ -13,7 +13,7 @@ In a networked application a view controller typically has the following states 
 
 As trivial as this flow may sound, there are a lot of cases that result in a rather large decision tree.
 
-![Decision Tree](decision_tree.png)
+![Decision Tree](Resources/decision_tree.png)
 
 StatefulViewController is a concrete implementation of this particular decision tree. (If you want to create your own modified version, you might be interested in the [state machine](#viewstatemachine) that is used to show and hide views.)
 
@@ -83,7 +83,7 @@ stateMachine.transitionToState(.None, animated: true) {
 
 <strike>pod "StatefulViewController", "~> 0.1"</strike>
 
-For now, just drag and drop the two classes in the `StatefulViewController` folder into your project.
+For now, just drag and drop the two classes in the `Source` folder into your project.
 
 ## Tests
 
@@ -102,7 +102,6 @@ xctool -scheme Tests -sdk iphonesimulator test
 * Views can provide delays in order to tell the state machine to show/remove them only after a specific delay (e.g. for hide and show animations)
 
 
-
 ## Contributing
 
 * Create something awesome, make the code better, add some functionality,
@@ -119,14 +118,3 @@ Feel free to get in touch.
 
 * Website: <http://schuch.me>
 * Twitter: [@schuchalexander](http://twitter.com/schuchalexander)
-
-
-## Licence
-
-Copyright (c) 2014 Alexander Schuch (http://schuch.me)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
