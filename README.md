@@ -11,9 +11,9 @@ In a networked application a view controller typically has the following states 
 * **Empty**: There is currently no content available to display.
 * **Error**: An error occured whilst downloading content.
 
-As trivial as this flow may sound, there are a lot of edge cases that result in a large tree of possible states.
+As trivial as this flow may sound, there are a lot of cases that result in a rather large decision tree.
 
-/// TODO: Image of tree
+![Decision Tree](decision_tree.png)
 
 StatefulViewController is a concrete implementation of this particular decision tree. (If you want to create your own modified version, you might be interested in the [state machine](#viewstatemachine) that is used to show and hide views.)
 
@@ -44,12 +44,22 @@ override func hasContent() -> Bool {
 }
 ```
 
+You might also be interested to respond to an error even if content is already shown. In this case, simply override `handleErrorWhenContentAvailable` to manually present the error to the user.
+
+```swift
+override func handleErrorWhenContentAvailable(error: NSError) {
+	let alertController = UIAlertController(title: "Ooops", message: "Something went wrong.", preferredStyle: .Alert)
+	alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+	self.presentViewController(alertController, animated: true, completion: nil)
+}
+```
+
 <a name="viewstatemachine"></a>
 ### View State Machine
 
 > Note: The following section is only intended for those, who want to create a stateful controller that differs from the flow described above.
 
-You can also use the underying view state machine to create a similar implementation for your custom flow of showing/hiding views.
+You can also use the underlying view state machine to create a similar implementation for your custom flow of showing/hiding views.
 
 ```swift
 let stateMachine = ViewStateMachine(view: view)
