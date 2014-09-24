@@ -152,6 +152,12 @@ public class ViewStateMachine {
 			self.view.addConstraints(vConstraints)
 		}
 		
+        let animations: () -> () = {
+            if let newView = self.viewStore[state] {
+                newView.alpha = 1.0
+            }
+        }
+        
 		let animationCompletion: (Bool) -> () = { (finished) in
 			for (key, view) in self.viewStore {
 				if !(key == state) {
@@ -161,21 +167,17 @@ public class ViewStateMachine {
 
 			completion?()
 		}
-		
-		let animations: () -> () = {
-			if let newView = self.viewStore[state] {
-				newView.alpha = 1.0
-			}
-		}
-		
-		if animated {
-			UIView.animateWithDuration(0.3, animations: animations, completion: animationCompletion)
-		} else {
-			animationCompletion(true)
-		}
+        
+		animateChanges(animated: animated, animations: animations, animationCompletion: animationCompletion)
 	}
 	
 	private func hideAllViews(#animated: Bool, completion: (() -> ())? = nil) {
+        let animations: () -> () = {
+            for (_, view) in self.viewStore {
+                view.alpha = 0.0
+            }
+        }
+        
 		let animationCompletion: (Bool) -> () = { (finished) in
 			for (_, view) in self.viewStore {
 				view.removeFromSuperview()
@@ -184,17 +186,14 @@ public class ViewStateMachine {
 			completion?()
 		}
 		
-		let animations: () -> () = {
-			for (_, view) in self.viewStore {
-				view.alpha = 0.0
-			}
-		}
-		
-		if animated {
-			UIView.animateWithDuration(0.3, animations: animations, completion: animationCompletion)
-		} else {
-			animationCompletion(true)
-		}
-	}
+        animateChanges(animated: animated, animations: animations, animationCompletion: animationCompletion)
+    }
 	
+    private func animateChanges(#animated: Bool, animations: () -> (), animationCompletion: (Bool) -> ()) {
+        if animated {
+            UIView.animateWithDuration(0.3, animations: animations, completion: animationCompletion)
+        } else {
+            animationCompletion(true)
+        }
+    }
 }
