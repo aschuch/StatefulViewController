@@ -16,6 +16,23 @@ public enum StatefulViewControllerState: String {
 	case Empty = "empty"
 }
 
+/// Delegate protocol
+@objc protocol StatefulViewControllerDelegate {
+    /// Return true if content is available in your controller.
+    ///
+    /// :returns: true if there is content available in your controller.
+    ///
+    func hasContent() -> Bool
+    
+    /// This method is called if an error occured, but `hasContent` returned true.
+    /// You would typically display an unobstrusive error message that is easily dismissable
+    /// for the user to continue browsing content.
+    ///
+    /// :param: error	The error that occured
+    ///
+    optional func handleErrorWhenContentAvailable(error: NSError)
+}
+
 ///
 /// A view controller subclass that presents placeholder views based on content, loading, error or empty states.
 ///
@@ -51,11 +68,7 @@ public class StatefulViewController: UIViewController {
 
 	
 	// MARK: UIViewController
-	
-	required public init(coder aDecoder: NSCoder)  {
-		super.init(coder: aDecoder)
-	}
-	
+		
 	override public func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 
@@ -97,11 +110,13 @@ public class StatefulViewController: UIViewController {
 	///
 	public func transitionViewStates(loading: Bool = false, error: NSError? = nil, animated: Bool = true) {
 		dispatch_async(dispatch_get_main_queue()) {
+            let hasContent = (self as? StatefulViewControllerDelegate)?.hasContent() ?? true
+            
 			// Update view for content (i.e. hide all placeholder views)
-			if self.hasContent() {
+			if hasContent {
 				if let e = error {
 					// show unobstrusive error
-					self.handleErrorWhenContentAvailable(e)
+					(self as? StatefulViewControllerDelegate)?.handleErrorWhenContentAvailable?(e)
 				}
 				self.stateMachine.transitionToState(.None, animated: animated)
 				return
@@ -124,25 +139,4 @@ public class StatefulViewController: UIViewController {
 	private func setPlaceholderView(view: UIView, forState state: StatefulViewControllerState) {
 		stateMachine[state.toRaw()] = view
 	}
-}
-
-
-// MARK: Overridable methods
-
-extension StatefulViewController {
-	/// Can be overridden by a subclass of StatefulViewController.
-	/// Return true if content is available in your controller.
-	///
-	/// :returns: true if there is content available in your controller.
-	///
-	public func hasContent() -> Bool { return true }
-	
-	/// Can be overridden by a subclass of StatefulViewController.
-	/// This method is called if an error occured, but `hasContent` returns true.
-	/// You would typically display some error message that is easily dismissable 
-	/// for the user to continue browsing content.
-	/// 
-	/// :param: error	The error that occured
-	///
-	public func handleErrorWhenContentAvailable(error: NSError) { }
 }

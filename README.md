@@ -19,7 +19,7 @@ StatefulViewController is a concrete implementation of this particular decision 
 
 ## Usage
 
-Configure the `loadingView`, `emptyView` and `errorView` properties of your subclass in `viewDidLoad`.
+Configure the `loadingView`, `emptyView` and `errorView` properties of your `StatefulViewController` subclass in `viewDidLoad`.
 
 After that, simply tell the view controller if content is currently being loaded and it will take care of showing and hiding the correct loading, error and empty view for you.
 
@@ -36,18 +36,20 @@ func loadDeliciousWines() {
 }
 ```
 
-`hasContent` should be overridden to indicate if there is any content to display. 
+### StatefulViewControllerDelegate
+
+StatefulViewController calls the `hasContent` delegate method to check if there is any content to display. If you do not implement this protocol, StatefulViewController will always assume that there is content to display.
 
 ```swift
-override func hasContent() -> Bool {
+func hasContent() -> Bool {
 	return countElements(datasourceArray) > 0
 }
 ```
 
-You might also be interested to respond to an error even if content is already shown. In this case, simply override `handleErrorWhenContentAvailable` to manually present the error to the user.
+Optionally, you might also be interested to respond to an error even if content is already shown. In this case, use `handleErrorWhenContentAvailable` to manually present the error to the user.
 
 ```swift
-override func handleErrorWhenContentAvailable(error: NSError) {
+func handleErrorWhenContentAvailable(error: NSError) {
 	let alertController = UIAlertController(title: "Ooops", message: "Something went wrong.", preferredStyle: .Alert)
 	alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
 	self.presentViewController(alertController, animated: true, completion: nil)

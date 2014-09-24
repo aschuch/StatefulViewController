@@ -37,7 +37,8 @@ class ViewController: StatefulViewController {
 	func refresh() {
 		if !(currentState != .Loading) { return } // TODO: beta 7 bug (use currentState == .Loading in future)
 		startLoading()
-
+        
+        // Fake network call
 		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
 			// Success
 			self.dataArray = ["Merlot", "Sauvignon Blanc", "Blaufränkisch", "Pinot Nior"]
@@ -53,18 +54,18 @@ class ViewController: StatefulViewController {
 		}
 	}
 
+}
 
-	// MARK: Stateful ViewController
-
-	override func hasContent() -> Bool {
-		return countElements(dataArray) > 0
-	}
-
-	override func handleErrorWhenContentAvailable(error: NSError) {
-		let alertController = UIAlertController(title: "Ooops", message: "Something went wrong.", preferredStyle: .Alert)
-		alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-		self.presentViewController(alertController, animated: true, completion: nil)
-	}
+extension ViewController: StatefulViewControllerDelegate {
+    func hasContent() -> Bool {
+        return countElements(dataArray) > 0
+    }
+    
+    func handleErrorWhenContentAvailable(error: NSError) {
+        let alertController = UIAlertController(title: "Ooops", message: "Something went wrong.", preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
 }
 
 extension ViewController: UITableViewDataSource {
