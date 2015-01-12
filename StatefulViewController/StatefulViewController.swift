@@ -17,7 +17,7 @@ public enum StatefulViewControllerState: String {
 }
 
 /// Delegate protocol
-@objc protocol StatefulViewControllerDelegate {
+@objc public protocol StatefulViewControllerDelegate {
     /// Return true if content is available in your controller.
     ///
     /// :returns: true if there is content available in your controller.

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import StatefulViewController
 
 class ViewController: StatefulViewController {
 	var dataArray = [String]()
