@@ -83,18 +83,38 @@ stateMachine.transitionToState(.None, animated: true) {
 
 ## Installation
 
-<strike>pod "StatefulViewController", "~> 0.1"</strike>
+#### Carthage
 
-For now, just drag and drop the two classes in the `Source` folder into your project.
+Add the following line to your [Cartfile](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile).
+
+```
+github "aschuch/StatefulViewController"
+```
+
+Then run `carthage update`.
+
+#### Cocoapods
+
+Add the following line to your Podfile.
+
+```
+pod "StatefulViewController", "~> 0.1"
+```
+
+Then run `pod install`.
+
+#### Manually
+
+Just drag and drop the two `.swift` files in the `StatefulViewController` folder into your project.
 
 ## Tests
 
 Open the Xcode project and press `⌘-U` to run the tests.
 
-Alternatively, all tests can be run in the terminal using [xctool](https://github.com/facebook/xctool) (once it is ready for Xcode 6).
+Alternatively, all tests can be run from the terminal using [xctool](https://github.com/facebook/xctool).
 
 ```bash
-xctool -scheme Tests -sdk iphonesimulator test
+xctool -scheme StatefulViewControllerTests -sdk iphonesimulator test
 ```
 
 ## Todo
