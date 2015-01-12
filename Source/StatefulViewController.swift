@@ -44,7 +44,7 @@ public class StatefulViewController: UIViewController {
 	public var currentState: StatefulViewControllerState {
 		switch stateMachine.currentState {
 			case .None: return .Content
-			case .View(let viewKey): return StatefulViewControllerState.fromRaw(viewKey)!
+			case .View(let viewKey): return StatefulViewControllerState(rawValue: viewKey)!
 		}
 	}
 
@@ -129,7 +129,7 @@ public class StatefulViewController: UIViewController {
 			} else if let e = error {
 				newState = .Error
 			}
-			self.stateMachine.transitionToState(.View(newState.toRaw()), animated: animated)
+			self.stateMachine.transitionToState(.View(newState.rawValue), animated: animated)
 		}
 	}
 	
@@ -137,6 +137,6 @@ public class StatefulViewController: UIViewController {
 	// MARK: Helper
 	
 	private func setPlaceholderView(view: UIView, forState state: StatefulViewControllerState) {
-		stateMachine[state.toRaw()] = view
+		stateMachine[state.rawValue] = view
 	}
 }
