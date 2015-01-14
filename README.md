@@ -95,13 +95,15 @@ Then run `carthage update`.
 
 #### Cocoapods
 
+**NOTE:** Cocoapods does not officially support Swift projects yet.  Make sure you have Cocoapods 0.36 beta installed by running `gem install cocoapods --pre`.
+
 Add the following line to your Podfile.
 
 ```
-pod "StatefulViewController", "~> 0.1"
+pod "StatefulViewController", :git => "https://github.com/aschuch/StatefulViewController"
 ```
 
-Then run `pod install`.
+Then run `pod install` with Cocoapods 0.36 or newer.
 
 #### Manually
 
