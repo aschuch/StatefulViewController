@@ -1,5 +1,7 @@
 # StatefulViewController
 
+[![Build Status](https://travis-ci.org/aschuch/StatefulViewController.svg)](https://travis-ci.org/aschuch/StatefulViewController)
+
 A view controller subclass that presents placeholder views based on content, loading, error or empty states.
 
 ![StatefulViewController Example](Resources/example.gif)
