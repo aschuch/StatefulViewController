@@ -102,7 +102,7 @@ Then run `carthage update`.
 Add the following line to your Podfile.
 
 ```
-pod "StatefulViewController", :git => "https://github.com/aschuch/StatefulViewController"
+pod "StatefulViewController", "~> 0.1"
 ```
 
 Then run `pod install` with Cocoapods 0.36 or newer.
