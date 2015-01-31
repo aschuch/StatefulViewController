@@ -36,7 +36,7 @@ class ViewController: StatefulViewController {
 	}
 
 	func refresh() {
-		if !(currentState != .Loading) { return } // TODO: beta 7 bug (use currentState == .Loading in future)
+		if (currentState == .Loading) { return }
 		startLoading()
         
         // Fake network call
