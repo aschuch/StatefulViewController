@@ -66,7 +66,7 @@ class ViewController: StatefulViewController {
 
 extension ViewController: StatefulViewControllerDelegate {
     func hasContent() -> Bool {
-        return countElements(dataArray) > 0
+        return count(dataArray) > 0
     }
     
     func handleErrorWhenContentAvailable(error: NSError) {
@@ -79,11 +79,11 @@ extension ViewController: StatefulViewControllerDelegate {
 extension ViewController: UITableViewDataSource {
 
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return countElements(dataArray)
+		return count(dataArray)
 	}
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCellWithIdentifier("textCell", forIndexPath: indexPath) as UITableViewCell
+		let cell = tableView.dequeueReusableCellWithIdentifier("textCell", forIndexPath: indexPath) as! UITableViewCell
 		cell.textLabel?.text = dataArray[indexPath.row]
 		return cell
 	}
