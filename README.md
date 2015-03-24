@@ -1,6 +1,8 @@
 # StatefulViewController
 
+<!--
 [![Build Status](https://travis-ci.org/aschuch/StatefulViewController.svg)](https://travis-ci.org/aschuch/StatefulViewController)
+-->
 
 A view controller subclass that presents placeholder views based on content, loading, error or empty states.
 
@@ -84,6 +86,8 @@ stateMachine.transitionToState(.None, animated: true) {
 ```
 
 ## Installation
+
+The master branch of AwesomeCache is ready for swift 1.2. In case you are still on 1.1, please refer to the `swift-1.1` tag.
 
 #### Carthage
 
