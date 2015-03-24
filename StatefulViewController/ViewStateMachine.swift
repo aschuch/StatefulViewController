@@ -41,7 +41,10 @@ public class ViewStateMachine {
     /// The current display state of views
 	public private(set) var currentState: ViewStateMachineState = .None
 	
+    /// The last state that was enqueued
+    public private(set) var lastState: ViewStateMachineState = .None
 	
+    
 	// MARK: Init
 	
 	///  Designated initializer.
@@ -109,6 +112,8 @@ public class ViewStateMachine {
 	/// :param: campletion	called when all animations are finished and the view has been updated
 	///
 	public func transitionToState(state: ViewStateMachineState, animated: Bool = true, completion: (() -> ())? = nil) {
+        lastState = state
+        
 		dispatch_async(queue) {
 			if state == self.currentState {
 				return

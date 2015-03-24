@@ -30,21 +30,28 @@ class ViewController: StatefulViewController {
 	}
 
 	override func viewWillAppear(animated: Bool) {
+        refresh()
+        
 		super.viewWillAppear(animated)
-
-		refresh()
 	}
 
 	func refresh() {
-		if (currentState == .Loading) { return }
-		startLoading()
+		if (lastState == .Loading) { return }
+        
+        startLoading(completion: {
+            println("completaion startLoading -> loadingState: \(self.currentState.rawValue)")
+        })
+        println("startLoading -> loadingState: \(self.lastState.rawValue)")
         
         // Fake network call
-		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
 			// Success
 			self.dataArray = ["Merlot", "Sauvignon Blanc", "Blaufränkisch", "Pinot Nior"]
 			self.tableView.reloadData()
-			self.endLoading(error: nil)
+            self.endLoading(error: nil, completion: {
+                println("completion endLoading -> loadingState: \(self.currentState.rawValue)")
+            })
+            println("endLoading -> loadingState: \(self.lastState.rawValue)")
 			self.refreshControl.endRefreshing()
 
 			// Error

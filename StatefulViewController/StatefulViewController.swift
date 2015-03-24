@@ -43,11 +43,17 @@ public class StatefulViewController: UIViewController {
 	/// All states other than `Content` imply that there is a placeholder view shown.
 	public var currentState: StatefulViewControllerState {
 		switch stateMachine.currentState {
-			case .None: return .Content
-			case .View(let viewKey): return StatefulViewControllerState(rawValue: viewKey)!
+        case .None: return .Content
+		case .View(let viewKey): return StatefulViewControllerState(rawValue: viewKey)!
 		}
 	}
 
+    public var lastState: StatefulViewControllerState {
+        switch stateMachine.currentState {
+        case .None: return .Content
+        case .View(let viewKey): return StatefulViewControllerState(rawValue: viewKey)!
+        }
+    }
 
 	// MARK: Views
 	
@@ -71,8 +77,11 @@ public class StatefulViewController: UIViewController {
 		
 	override public func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
-
-		transitionViewStates(animated: false)
+        
+        // Make sure to stay in the correct state when transitioning
+        let isLoading = (currentState == .Loading)
+        let error: NSError? = (currentState == .Error) ? NSError() : nil
+		transitionViewStates(loading: isLoading, error: error, animated: false)
 	}
 	
 	
@@ -83,8 +92,8 @@ public class StatefulViewController: UIViewController {
 	///
 	/// :param: animated	true if the switch to the placeholder view should be animated, false otherwise
 	///
-	public func startLoading(animated: Bool = false) {
-		transitionViewStates(loading: true, animated: animated)
+    public func startLoading(animated: Bool = false, completion: (() -> ())? = nil) {
+        transitionViewStates(loading: true, animated: animated, completion: completion)
 	}
 	
 	/// Ends the controller's loading state.
@@ -94,8 +103,8 @@ public class StatefulViewController: UIViewController {
 	/// :param: animated	true if the switch to the placeholder view should be animated, false otherwise
 	/// :param: error		An error that might have occured whilst loading
 	///
-	public func endLoading(animated: Bool = true, error: NSError? = nil) {
-		transitionViewStates(loading: false, animated: animated, error: error)
+	public func endLoading(animated: Bool = true, error: NSError? = nil, completion: (() -> ())? = nil) {
+		transitionViewStates(loading: false, animated: animated, error: error, completion: completion)
 	}
 	
 	
@@ -108,29 +117,27 @@ public class StatefulViewController: UIViewController {
 	/// :param: error		An error that might have occured whilst loading
 	/// :param: animated	true if the switch to the placeholder view should be animated, false otherwise
 	///
-	public func transitionViewStates(loading: Bool = false, error: NSError? = nil, animated: Bool = true) {
-		dispatch_async(dispatch_get_main_queue()) {
-            let hasContent = (self as? StatefulViewControllerDelegate)?.hasContent() ?? true
-            
-			// Update view for content (i.e. hide all placeholder views)
-			if hasContent {
-				if let e = error {
-					// show unobstrusive error
-					(self as? StatefulViewControllerDelegate)?.handleErrorWhenContentAvailable?(e)
-				}
-				self.stateMachine.transitionToState(.None, animated: animated)
-				return
-			}
-			
-			// Update view for placeholder
-			var newState: StatefulViewControllerState = .Empty
-			if loading {
-				newState = .Loading
-			} else if let e = error {
-				newState = .Error
-			}
-			self.stateMachine.transitionToState(.View(newState.rawValue), animated: animated)
-		}
+    public func transitionViewStates(loading: Bool = false, error: NSError? = nil, animated: Bool = true, completion: (() -> ())? = nil) {
+        let hasContent = (self as? StatefulViewControllerDelegate)?.hasContent() ?? true
+        
+        // Update view for content (i.e. hide all placeholder views)
+        if hasContent {
+            if let e = error {
+                // show unobstrusive error
+                (self as? StatefulViewControllerDelegate)?.handleErrorWhenContentAvailable?(e)
+            }
+            self.stateMachine.transitionToState(.None, animated: animated, completion: completion)
+            return
+        }
+        
+        // Update view for placeholder
+        var newState: StatefulViewControllerState = .Empty
+        if loading {
+            newState = .Loading
+        } else if let e = error {
+            newState = .Error
+        }
+        self.stateMachine.transitionToState(.View(newState.rawValue), animated: animated, completion: completion)
 	}
 	
 	
