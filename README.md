@@ -3,6 +3,7 @@
 <!--
 [![Build Status](https://travis-ci.org/aschuch/StatefulViewController.svg)](https://travis-ci.org/aschuch/StatefulViewController)
 -->
+![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)
 
 A view controller subclass that presents placeholder views based on content, loading, error or empty states.
 
