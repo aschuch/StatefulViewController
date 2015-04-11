@@ -52,13 +52,14 @@ class ViewController: StatefulViewController {
                 println("completion endLoading -> loadingState: \(self.currentState.rawValue)")
             })
             println("endLoading -> loadingState: \(self.lastState.rawValue)")
-			self.refreshControl.endRefreshing()
 
 			// Error
 			//self.endLoading(error: NSError())
 
 			// No Content
 			//self.endLoading(error: nil)
+            
+            self.refreshControl.endRefreshing()
 		}
 	}
 
