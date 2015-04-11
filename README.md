@@ -29,6 +29,12 @@ Configure the `loadingView`, `emptyView` and `errorView` properties of your `Sta
 After that, simply tell the view controller if content is currently being loaded and it will take care of showing and hiding the correct loading, error and empty view for you.
 
 ```swift
+override func viewWillAppear(animated: Bool) {
+	super.viewWillAppear(animated)
+        
+    loadDeliciousWines()
+}
+
 func loadDeliciousWines() {
 	startLoading()
 	
