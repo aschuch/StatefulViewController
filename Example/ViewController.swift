@@ -30,9 +30,9 @@ class ViewController: StatefulViewController {
 	}
 
 	override func viewWillAppear(animated: Bool) {
-        refresh()
-        
 		super.viewWillAppear(animated)
+        
+        refresh()
 	}
 
 	func refresh() {

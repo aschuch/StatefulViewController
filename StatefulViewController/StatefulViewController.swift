@@ -90,7 +90,7 @@ public class StatefulViewController: UIViewController {
 	/// Transitions the controller to the loading state and shows
 	/// the loading view if there is no content shown already.
 	///
-	/// :param: animated	true if the switch to the placeholder view should be animated, false otherwise
+	/// :param: animated 	true if the switch to the placeholder view should be animated, false otherwise
 	///
     public func startLoading(animated: Bool = false, completion: (() -> ())? = nil) {
         transitionViewStates(loading: true, animated: animated, completion: completion)
@@ -100,7 +100,7 @@ public class StatefulViewController: UIViewController {
 	/// If an error occured, the error view is shown.
 	/// If the `hasContent` method returns false after calling this method, the empty view is shown.
 	///
-	/// :param: animated	true if the switch to the placeholder view should be animated, false otherwise
+	/// :param: animated 	true if the switch to the placeholder view should be animated, false otherwise
 	/// :param: error		An error that might have occured whilst loading
 	///
 	public func endLoading(animated: Bool = true, error: NSError? = nil, completion: (() -> ())? = nil) {
