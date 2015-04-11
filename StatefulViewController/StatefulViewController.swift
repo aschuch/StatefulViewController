@@ -49,7 +49,7 @@ public class StatefulViewController: UIViewController {
 	}
 
     public var lastState: StatefulViewControllerState {
-        switch stateMachine.currentState {
+        switch stateMachine.lastState {
         case .None: return .Content
         case .View(let viewKey): return StatefulViewControllerState(rawValue: viewKey)!
         }
@@ -79,8 +79,8 @@ public class StatefulViewController: UIViewController {
 		super.viewWillAppear(animated)
         
         // Make sure to stay in the correct state when transitioning
-        let isLoading = (currentState == .Loading)
-        let error: NSError? = (currentState == .Error) ? NSError() : nil
+        let isLoading = (lastState == .Loading)
+        let error: NSError? = (lastState == .Error) ? NSError() : nil
 		transitionViewStates(loading: isLoading, error: error, animated: false)
 	}
 	
