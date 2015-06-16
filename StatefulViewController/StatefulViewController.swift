@@ -33,11 +33,30 @@ public enum StatefulViewControllerState: String {
     optional func handleErrorWhenContentAvailable(error: NSError)
 }
 
+private var stateMachineAssociationKey: UInt8 = 0
+private var loadingViewAssociationKey: UInt8 = 0
+private var errorViewAssociationKey: UInt8 = 0
+private var emptyViewAssociationKey: UInt8 = 0
+
 ///
 /// A view controller subclass that presents placeholder views based on content, loading, error or empty states.
 ///
-public class StatefulViewController: UIViewController {
-    lazy private var stateMachine: ViewStateMachine = ViewStateMachine(view: self.view)
+extension UIViewController {
+
+    private var stateMachine: ViewStateMachine! {
+        get {
+            var value = objc_getAssociatedObject(self, &stateMachineAssociationKey) as? ViewStateMachine
+            if value == nil
+            {
+                value = ViewStateMachine(view: self.view)
+                objc_setAssociatedObject(self, &stateMachineAssociationKey, value, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN))
+            }
+            return value
+        }
+        set(newValue) {
+            objc_setAssociatedObject(self, &stateMachineAssociationKey, newValue, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN))
+        }
+    }
     
     /// The current state of the view controller.
     /// All states other than `Content` imply that there is a placeholder view shown.
@@ -59,25 +78,41 @@ public class StatefulViewController: UIViewController {
     
     /// The loading view is shown when the `startLoading` method gets called
     public var loadingView: UIView! {
-        didSet { setPlaceholderView(loadingView, forState: .Loading) }
+        get {
+            return objc_getAssociatedObject(self, &loadingViewAssociationKey) as? UIView
+        }
+        set(newValue) {
+            objc_setAssociatedObject(self, &loadingViewAssociationKey, newValue, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN))
+            setPlaceholderView(newValue, forState: .Loading)
+        }
     }
     
     /// The error view is shown when the `endLoading` method returns an error
     public var errorView: UIView! {
-        didSet { setPlaceholderView(errorView, forState: .Error) }
+        get {
+            return objc_getAssociatedObject(self, &errorViewAssociationKey) as? UIView
+        }
+        set(newValue) {
+            objc_setAssociatedObject(self, &errorViewAssociationKey, newValue, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN))
+            setPlaceholderView(newValue, forState: .Error)
+        }
     }
     
     /// The empty view is shown when the `hasContent` method returns false
     public var emptyView: UIView! {
-        didSet { setPlaceholderView(emptyView, forState: .Empty) }
+        get {
+            return objc_getAssociatedObject(self, &emptyViewAssociationKey) as? UIView
+        }
+        set(newValue) {
+            objc_setAssociatedObject(self, &emptyViewAssociationKey, newValue, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN))
+            setPlaceholderView(newValue, forState: .Empty)
+        }
     }
     
     
     // MARK: UIViewController
     
-    override public func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
+    public func statefulViewWillAppear() {
         // Make sure to stay in the correct state when transitioning
         let isLoading = (lastState == .Loading)
         let error: NSError? = (lastState == .Error) ? NSError() : nil

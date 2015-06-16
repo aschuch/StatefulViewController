@@ -9,7 +9,7 @@
 import UIKit
 import StatefulViewController
 
-class ViewController: StatefulViewController {
+class ViewController: UIViewController {
     var dataArray = [String]()
     let refreshControl = UIRefreshControl()
     @IBOutlet weak var tableView: UITableView!
@@ -31,6 +31,8 @@ class ViewController: StatefulViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        statefulViewWillAppear()
         
         refresh()
     }
