@@ -49,19 +49,19 @@ public class ViewStateMachine {
     
     ///  Designated initializer.
     ///
-    /// :param: view		The view that should act as the superview for any added views
-    /// :param: states		A dictionary of states
+    /// - parameter view:		The view that should act as the superview for any added views
+    /// - parameter states:		A dictionary of states
     ///
-    /// :returns:			A view state machine with the given views for states
+    /// - returns:			A view state machine with the given views for states
     ///
     public init(view: UIView, states: [String: UIView]?) {
         self.view = view
         viewStore = states ?? [String: UIView]()
     }
     
-    /// :param: view		The view that should act as the superview for any added views
+    /// - parameter view:		The view that should act as the superview for any added views
     ///
-    /// :returns:			A view state machine
+    /// - returns:			A view state machine
     ///
     public convenience init(view: UIView) {
         self.init(view: view, states: nil)
@@ -70,7 +70,7 @@ public class ViewStateMachine {
     
     // MARK: Add and remove view states
     
-    /// :returns: the view for a given state
+    /// - returns: the view for a given state
     public func viewForState(state: String) -> UIView? {
         return viewStore[state]
     }
@@ -107,9 +107,9 @@ public class ViewStateMachine {
     /// Adds and removes views to and from the `view` based on the given state.
     /// Animations are synchronized in order to make sure that there aren't any animation gliches in the UI
     ///
-    /// :param: state		The state to transition to
-    /// :param: animated	true if the transition should fade views in and out
-    /// :param: campletion	called when all animations are finished and the view has been updated
+    /// - parameter state:		The state to transition to
+    /// - parameter animated:	true if the transition should fade views in and out
+    /// - parameter campletion:	called when all animations are finished and the view has been updated
     ///
     public func transitionToState(state: ViewStateMachineState, animated: Bool = true, completion: (() -> ())? = nil) {
         lastState = state
@@ -147,12 +147,12 @@ public class ViewStateMachine {
         if let newView = self.viewStore[state] {
             // Add new view using AutoLayout
             newView.alpha = animated ? 0.0 : 1.0
-            newView.setTranslatesAutoresizingMaskIntoConstraints(false)
+            newView.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview(newView)
             
             let views = ["view": newView]
-            let hConstraints = NSLayoutConstraint.constraintsWithVisualFormat("|[view]|", options: nil, metrics: nil, views: views)
-            let vConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|[view]|", options: nil, metrics: nil, views: views)
+            let hConstraints = NSLayoutConstraint.constraintsWithVisualFormat("|[view]|", options: [], metrics: nil, views: views)
+            let vConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|[view]|", options: [], metrics: nil, views: views)
             self.view.addConstraints(hConstraints)
             self.view.addConstraints(vConstraints)
         }
@@ -176,7 +176,7 @@ public class ViewStateMachine {
         animateChanges(animated: animated, animations: animations, animationCompletion: animationCompletion)
     }
     
-    private func hideAllViews(#animated: Bool, completion: (() -> ())? = nil) {
+    private func hideAllViews(animated animated: Bool, completion: (() -> ())? = nil) {
         let animations: () -> () = {
             for (_, view) in self.viewStore {
                 view.alpha = 0.0
@@ -194,7 +194,7 @@ public class ViewStateMachine {
         animateChanges(animated: animated, animations: animations, animationCompletion: animationCompletion)
     }
     
-    private func animateChanges(#animated: Bool, animations: () -> (), animationCompletion: (Bool) -> ()) {
+    private func animateChanges(animated animated: Bool, animations: () -> (), animationCompletion: (Bool) -> ()) {
         if animated {
             UIView.animateWithDuration(0.3, animations: animations, completion: animationCompletion)
         } else {
