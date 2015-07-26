@@ -20,7 +20,7 @@ public enum StatefulViewControllerState: String {
 @objc public protocol StatefulViewControllerDelegate {
     /// Return true if content is available in your controller.
     ///
-    /// :returns: true if there is content available in your controller.
+    /// - returns: true if there is content available in your controller.
     ///
     func hasContent() -> Bool
     
@@ -28,7 +28,7 @@ public enum StatefulViewControllerState: String {
     /// You would typically display an unobstrusive error message that is easily dismissable
     /// for the user to continue browsing content.
     ///
-    /// :param: error	The error that occured
+    /// - parameter error:	The error that occured
     ///
     optional func handleErrorWhenContentAvailable(error: NSError)
 }
@@ -80,8 +80,8 @@ public class StatefulViewController: UIViewController {
         
         // Make sure to stay in the correct state when transitioning
         let isLoading = (lastState == .Loading)
-        let error: NSError? = (lastState == .Error) ? NSError() : nil
-        transitionViewStates(loading: isLoading, error: error, animated: false)
+        let error: NSError? = (lastState == .Error) ? NSError(domain: "", code: 0, userInfo: nil) : nil
+        transitionViewStates(isLoading, error: error, animated: false)
     }
     
     
@@ -90,21 +90,21 @@ public class StatefulViewController: UIViewController {
     /// Transitions the controller to the loading state and shows
     /// the loading view if there is no content shown already.
     ///
-    /// :param: animated 	true if the switch to the placeholder view should be animated, false otherwise
+    /// - parameter animated: 	true if the switch to the placeholder view should be animated, false otherwise
     ///
     public func startLoading(animated: Bool = false, completion: (() -> ())? = nil) {
-        transitionViewStates(loading: true, animated: animated, completion: completion)
+        transitionViewStates(true, animated: animated, completion: completion)
     }
     
     /// Ends the controller's loading state.
     /// If an error occured, the error view is shown.
     /// If the `hasContent` method returns false after calling this method, the empty view is shown.
     ///
-    /// :param: animated 	true if the switch to the placeholder view should be animated, false otherwise
-    /// :param: error		An error that might have occured whilst loading
+    /// - parameter animated: 	true if the switch to the placeholder view should be animated, false otherwise
+    /// - parameter error:		An error that might have occured whilst loading
     ///
     public func endLoading(animated: Bool = true, error: NSError? = nil, completion: (() -> ())? = nil) {
-        transitionViewStates(loading: false, animated: animated, error: error, completion: completion)
+        transitionViewStates(false, animated: animated, error: error, completion: completion)
     }
     
     
@@ -113,9 +113,9 @@ public class StatefulViewController: UIViewController {
     /// Transitions the view to the appropriate state based on the `loading` and `error`
     /// input parameters and shows/hides corresponding placeholder views.
     ///
-    /// :param: loading		true if the controller is currently loading
-    /// :param: error		An error that might have occured whilst loading
-    /// :param: animated	true if the switch to the placeholder view should be animated, false otherwise
+    /// - parameter loading:		true if the controller is currently loading
+    /// - parameter error:		An error that might have occured whilst loading
+    /// - parameter animated:	true if the switch to the placeholder view should be animated, false otherwise
     ///
     public func transitionViewStates(loading: Bool = false, error: NSError? = nil, animated: Bool = true, completion: (() -> ())? = nil) {
         let hasContent = (self as? StatefulViewControllerDelegate)?.hasContent() ?? true
@@ -134,7 +134,7 @@ public class StatefulViewController: UIViewController {
         var newState: StatefulViewControllerState = .Empty
         if loading {
             newState = .Loading
-        } else if let e = error {
+        } else if let _ = error {
             newState = .Error
         }
         self.stateMachine.transitionToState(.View(newState.rawValue), animated: animated, completion: completion)
