@@ -22,7 +22,7 @@ class ErrorView: BasicPlaceholderView {
 		self.addGestureRecognizer(tapGestureRecognizer)
 		
 		textLabel.text = "Something went wrong."
-		textLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+		textLabel.translatesAutoresizingMaskIntoConstraints = false
 		centerView.addSubview(textLabel)
 		
 		detailTextLabel.text = "Tap to reload"
@@ -30,7 +30,7 @@ class ErrorView: BasicPlaceholderView {
 		detailTextLabel.font = UIFont(descriptor: fontDescriptor, size: 0)
 		detailTextLabel.textAlignment = .Center
 		detailTextLabel.textColor = UIColor.grayColor()
-		detailTextLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+		detailTextLabel.translatesAutoresizingMaskIntoConstraints = false
 		centerView.addSubview(detailTextLabel)
 		
 		let views = ["label": textLabel, "detailLabel": detailTextLabel]

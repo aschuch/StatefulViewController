@@ -39,9 +39,9 @@ class ViewController: StatefulViewController {
         if (lastState == .Loading) { return }
         
         startLoading(completion: {
-            println("completaion startLoading -> loadingState: \(self.currentState.rawValue)")
+            print("completaion startLoading -> loadingState: \(self.currentState.rawValue)")
         })
-        println("startLoading -> loadingState: \(self.lastState.rawValue)")
+        print("startLoading -> loadingState: \(self.lastState.rawValue)")
         
         // Fake network call
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
@@ -49,9 +49,9 @@ class ViewController: StatefulViewController {
             self.dataArray = ["Merlot", "Sauvignon Blanc", "Blaufränkisch", "Pinot Nior"]
             self.tableView.reloadData()
             self.endLoading(error: nil, completion: {
-                println("completion endLoading -> loadingState: \(self.currentState.rawValue)")
+                print("completion endLoading -> loadingState: \(self.currentState.rawValue)")
             })
-            println("endLoading -> loadingState: \(self.lastState.rawValue)")
+            print("endLoading -> loadingState: \(self.lastState.rawValue)")
             
             // Error
             //self.endLoading(error: NSError())
@@ -67,7 +67,7 @@ class ViewController: StatefulViewController {
 
 extension ViewController: StatefulViewControllerDelegate {
     func hasContent() -> Bool {
-        return count(dataArray) > 0
+        return dataArray.count > 0
     }
     
     func handleErrorWhenContentAvailable(error: NSError) {
@@ -80,11 +80,11 @@ extension ViewController: StatefulViewControllerDelegate {
 extension ViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return count(dataArray)
+        return dataArray.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("textCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("textCell", forIndexPath: indexPath) 
         cell.textLabel?.text = dataArray[indexPath.row]
         return cell
     }
