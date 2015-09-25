@@ -9,7 +9,7 @@
 import UIKit
 import StatefulViewController
 
-class ViewController: StatefulViewController {
+class ViewController: UIViewController, StatefulViewController {
     var dataArray = [String]()
     let refreshControl = UIRefreshControl()
     @IBOutlet weak var tableView: UITableView!
@@ -32,6 +32,7 @@ class ViewController: StatefulViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        setupInitialViewState()
         refresh()
     }
     
@@ -54,7 +55,7 @@ class ViewController: StatefulViewController {
             print("endLoading -> loadingState: \(self.lastState.rawValue)")
             
             // Error
-            //self.endLoading(error: NSError())
+            //self.endLoading(error: NSError(domain: "foo", code: -1, userInfo: nil))
             
             // No Content
             //self.endLoading(error: nil)
@@ -65,17 +66,21 @@ class ViewController: StatefulViewController {
     
 }
 
-extension ViewController: StatefulViewControllerDelegate {
+
+extension ViewController {
+    
     func hasContent() -> Bool {
         return dataArray.count > 0
     }
     
-    func handleErrorWhenContentAvailable(error: NSError) {
+    func handleErrorWhenContentAvailable(error: ErrorType) {
         let alertController = UIAlertController(title: "Ooops", message: "Something went wrong.", preferredStyle: .Alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
         self.presentViewController(alertController, animated: true, completion: nil)
     }
+    
 }
+
 
 extension ViewController: UITableViewDataSource {
     

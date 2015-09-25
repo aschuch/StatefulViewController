@@ -15,6 +15,7 @@
 		4D64515E1A64079300108EA3 /* StatefulViewController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4D6451461A64079200108EA3 /* StatefulViewController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4D6451681A64089800108EA3 /* StatefulViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6451661A64089800108EA3 /* StatefulViewController.swift */; };
 		4D6451691A64089800108EA3 /* ViewStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6451671A64089800108EA3 /* ViewStateMachine.swift */; };
+		4DC230DD1BB5BA810083B95A /* StatefulViewControllerImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC230DC1BB5BA810083B95A /* StatefulViewControllerImplementation.swift */; settings = {ASSET_TAGS = (); }; };
 		4DE62AE219B658610021630A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE62AE119B658610021630A /* AppDelegate.swift */; };
 		4DE62AE419B658610021630A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE62AE319B658610021630A /* ViewController.swift */; };
 		4DE62AE719B658610021630A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DE62AE519B658610021630A /* Main.storyboard */; };
@@ -73,6 +74,7 @@
 		4D6451591A64079300108EA3 /* StatefulViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatefulViewControllerTests.swift; sourceTree = "<group>"; };
 		4D6451661A64089800108EA3 /* StatefulViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatefulViewController.swift; sourceTree = "<group>"; };
 		4D6451671A64089800108EA3 /* ViewStateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewStateMachine.swift; sourceTree = "<group>"; };
+		4DC230DC1BB5BA810083B95A /* StatefulViewControllerImplementation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatefulViewControllerImplementation.swift; sourceTree = "<group>"; };
 		4DE62ADC19B658610021630A /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DE62AE019B658610021630A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DE62AE119B658610021630A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				4D6451661A64089800108EA3 /* StatefulViewController.swift */,
+				4DC230DC1BB5BA810083B95A /* StatefulViewControllerImplementation.swift */,
 				4D6451671A64089800108EA3 /* ViewStateMachine.swift */,
 				4D64514A1A64079200108EA3 /* StatefulViewController.h */,
 				4D6451481A64079200108EA3 /* Supporting Files */,
@@ -346,6 +349,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DC230DD1BB5BA810083B95A /* StatefulViewControllerImplementation.swift in Sources */,
 				4D6451691A64089800108EA3 /* ViewStateMachine.swift in Sources */,
 				4D6451681A64089800108EA3 /* StatefulViewController.swift in Sources */,
 			);
