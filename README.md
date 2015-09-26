@@ -123,26 +123,22 @@ stateMachine.transitionToState(.None, animated: true) {
 
 ## Installation
 
-The master branch of AwesomeCache is ready for swift 1.2. In case you are still on 1.1, please refer to the `swift-1.1` tag.
-
 #### Carthage
 
 Add the following line to your [Cartfile](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile).
 
 ```
-github "aschuch/StatefulViewController"
+github "aschuch/StatefulViewController", ~> 2.0
 ```
 
 Then run `carthage update`.
 
 #### Cocoapods
 
-**NOTE:** Cocoapods does not officially support Swift projects yet.  Make sure you have Cocoapods 0.36 beta installed by running `gem install cocoapods --pre`.
-
 Add the following line to your Podfile.
 
 ```
-pod "StatefulViewController", "~> 0.1"
+pod "StatefulViewController", "~> 2.0"
 ```
 
 Then run `pod install` with Cocoapods 0.36 or newer.
