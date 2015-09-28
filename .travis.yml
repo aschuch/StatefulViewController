@@ -1,3 +1,6 @@
+before_install:
+	- brew update
+	- brew install xctool
 osx_image: xcode7
 language: objective-c
 script: xctool -scheme StatefulViewControllerTests -sdk iphonesimulator test
