@@ -100,11 +100,11 @@ extension StatefulViewController {
     
     // MARK: Content and error handling
     
-    func hasContent() -> Bool {
+    public func hasContent() -> Bool {
         return true
     }
     
-    func handleErrorWhenContentAvailable(error: ErrorType) {
+    public func handleErrorWhenContentAvailable(error: ErrorType) {
         // Default implementation does nothing.
     }
     
