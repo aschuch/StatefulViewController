@@ -18,7 +18,7 @@ class EmptyView: BasicPlaceholderView {
 		backgroundColor = UIColor.whiteColor()
 		
 		label.text = "No Content."
-		label.setTranslatesAutoresizingMaskIntoConstraints(false)
+		label.translatesAutoresizingMaskIntoConstraints = false
 		centerView.addSubview(label)
 		
 		let views = ["label": label]

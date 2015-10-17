@@ -18,7 +18,7 @@ class BasicPlaceholderView: UIView {
 		setupView()
 	}
 	
-	required init(coder aDecoder: NSCoder) {
+	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		
 		setupView()
@@ -27,7 +27,7 @@ class BasicPlaceholderView: UIView {
 	func setupView() {
 		backgroundColor = UIColor.whiteColor()
 		
-		centerView.setTranslatesAutoresizingMaskIntoConstraints(false)
+		centerView.translatesAutoresizingMaskIntoConstraints = false
 		self.addSubview(centerView)
 		
 		let views = ["centerView": centerView, "superview": self]

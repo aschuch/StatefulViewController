@@ -3,11 +3,11 @@
 [![Build Status](https://travis-ci.org/aschuch/StatefulViewController.svg)](https://travis-ci.org/aschuch/StatefulViewController)
 ![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)
 
-A view controller subclass that presents placeholder views based on content, loading, error or empty states.
+A protocol to enable `UIViewController`s or `UIView`s to present placeholder views based on content, loading, error or empty states.
 
 ![StatefulViewController Example](Resources/example.gif)
 
-In a networked application a view controller typically has the following states that need to be communicated to the user:
+In a networked application a view controller or custom view typically has the following states that need to be communicated to the user:
 
 * **Loading**: The content is currently loaded over the network.
 * **Content**: The content is available and presented to the user.
@@ -18,17 +18,47 @@ As trivial as this flow may sound, there are a lot of cases that result in a rat
 
 ![Decision Tree](Resources/decision_tree.png)
 
-StatefulViewController is a concrete implementation of this particular decision tree. (If you want to create your own modified version, you might be interested in the [state machine](#viewstatemachine) that is used to show and hide views.)
+`StatefulViewController` is a concrete implementation of this particular decision tree. (If you want to create your own modified version, you might be interested in the [state machine](#viewstatemachine) that is used to show and hide views.)
 
 ## Usage
+> This guide describes the use of the `StatefulViewController` protocol on `UIViewController`. However, you can also adopt the `StatefulViewController` protocol on any `UIViewController` subclass, such as `UITableViewController` or `UICollectionViewController`, as well as your custom `UIView` subclasses.
 
-Configure the `loadingView`, `emptyView` and `errorView` properties of your `StatefulViewController` subclass in `viewDidLoad`.
+First, make sure your view controller adopts to the `StatefulViewController` protocol. 
 
-After that, simply tell the view controller if content is currently being loaded and it will take care of showing and hiding the correct loading, error and empty view for you.
+```swift 
+class MyViewController: UIViewController, StatefulViewController {
+    // ...
+}
+``` 
+
+Then, configure the `loadingView`, `emptyView` and `errorView` properties (provided by the `StatefulViewController` protocol) in `viewDidLoad`.
+
+```swift
+override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    // Setup placeholder views
+    loadingView = // UIView
+    emptyView = // UIView
+    errorView = // UIView
+}
+```
+
+In addition, call the `setupInitialViewState()` method in `viewWillAppear:` in order to setup the initial state of the controller.
 
 ```swift
 override func viewWillAppear(animated: Bool) {
-	super.viewWillAppear(animated)
+    super.viewWillAppear(animated)
+        
+    setupInitialViewState()
+}
+```
+
+After that, simply tell the view controller whenever content is loading and `StatefulViewController` will take care of showing and hiding the correct loading, error and empty view for you.
+
+```swift
+override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
         
     loadDeliciousWines()
 }
@@ -38,27 +68,28 @@ func loadDeliciousWines() {
 	
 	let url = NSURL(string: "http://example.com/api")
 	let session = NSURLSession.sharedSession()
-	let task = session.dataTaskWithURL(url) { (let data, let response, let error) in
+	session.dataTaskWithURL(url) { (let data, let response, let error) in
 		endLoading(error: error)
-	}
-	task.resume()
+	}.resume()
 }
 ```
 
-### StatefulViewControllerDelegate
+### Life cycle
 
-StatefulViewController calls the `hasContent` delegate method to check if there is any content to display. If you do not implement this protocol, StatefulViewController will always assume that there is content to display.
+StatefulViewController calls the `hasContent` method to check if there is any content to display. If you do not override this method in your own class, `StatefulViewController` will always assume that there is content to display.
 
 ```swift
 func hasContent() -> Bool {
-	return countElements(datasourceArray) > 0
+	return datasourceArray.count > 0
 }
 ```
 
-Optionally, you might also be interested to respond to an error even if content is already shown. In this case, use `handleErrorWhenContentAvailable` to manually present the error to the user.
+Optionally, you might also be interested to respond to an error even if content is already shown. `StatefulViewController` will not show its `errorView` in this case, because there is already content that can be shown.
+
+To e.g. show a custom alert or other unobtrusive error message, use `handleErrorWhenContentAvailable:` to manually present the error to the user.
 
 ```swift
-func handleErrorWhenContentAvailable(error: NSError) {
+func handleErrorWhenContentAvailable(error: ErrorType) {
 	let alertController = UIAlertController(title: "Ooops", message: "Something went wrong.", preferredStyle: .Alert)
 	alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
 	self.presentViewController(alertController, animated: true, completion: nil)
@@ -92,26 +123,22 @@ stateMachine.transitionToState(.None, animated: true) {
 
 ## Installation
 
-The master branch of AwesomeCache is ready for swift 1.2. In case you are still on 1.1, please refer to the `swift-1.1` tag.
-
 #### Carthage
 
 Add the following line to your [Cartfile](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile).
 
 ```
-github "aschuch/StatefulViewController"
+github "aschuch/StatefulViewController", ~> 2.0
 ```
 
 Then run `carthage update`.
 
 #### Cocoapods
 
-**NOTE:** Cocoapods does not officially support Swift projects yet.  Make sure you have Cocoapods 0.36 beta installed by running `gem install cocoapods --pre`.
-
 Add the following line to your Podfile.
 
 ```
-pod "StatefulViewController", "~> 0.1"
+pod "StatefulViewController", "~> 2.0"
 ```
 
 Then run `pod install` with Cocoapods 0.36 or newer.

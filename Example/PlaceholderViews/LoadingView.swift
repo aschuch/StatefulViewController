@@ -18,18 +18,18 @@ class LoadingView: BasicPlaceholderView {
 		backgroundColor = UIColor.whiteColor()
 		
 		label.text = "Loading..."
-		label.setTranslatesAutoresizingMaskIntoConstraints(false)
+		label.translatesAutoresizingMaskIntoConstraints = false
 		centerView.addSubview(label)
 		
 		let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
 		activityIndicator.startAnimating()
-		activityIndicator.setTranslatesAutoresizingMaskIntoConstraints(false)
+		activityIndicator.translatesAutoresizingMaskIntoConstraints = false
 		centerView.addSubview(activityIndicator)
 		
 		let views = ["label": label, "activity": activityIndicator]
-		let hConstraints = NSLayoutConstraint.constraintsWithVisualFormat("|-[activity]-[label]-|", options: nil, metrics: nil, views: views)
-		let vConstraintsLabel = NSLayoutConstraint.constraintsWithVisualFormat("V:|[label]|", options: nil, metrics: nil, views: views)
-		let vConstraintsActivity = NSLayoutConstraint.constraintsWithVisualFormat("V:|[activity]|", options: nil, metrics: nil, views: views)
+		let hConstraints = NSLayoutConstraint.constraintsWithVisualFormat("|-[activity]-[label]-|", options: [], metrics: nil, views: views)
+		let vConstraintsLabel = NSLayoutConstraint.constraintsWithVisualFormat("V:|[label]|", options: [], metrics: nil, views: views)
+		let vConstraintsActivity = NSLayoutConstraint.constraintsWithVisualFormat("V:|[activity]|", options: [], metrics: nil, views: views)
 
 		centerView.addConstraints(hConstraints)
 		centerView.addConstraints(vConstraintsLabel)
