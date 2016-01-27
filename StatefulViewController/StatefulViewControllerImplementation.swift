@@ -60,14 +60,14 @@ extension StatefulViewController {
     }
 
     public var stateInsets: UIEdgeInsets {
-        get { return UIEdgeInsetsZero }
-        set { stateMachine.insets = newValue }
+        return UIEdgeInsetsZero
     }
 
     
     // MARK: Transitions
     
     public func setupInitialViewState() {
+        stateMachine.insets = stateInsets
         let isLoading = (lastState == .Loading)
         let error: NSError? = (lastState == .Error) ? NSError(domain: "com.aschuch.StatefulViewController.ErrorDomain", code: -1, userInfo: nil) : nil
         transitionViewStates(isLoading, error: error, animated: false)
