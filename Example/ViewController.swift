@@ -13,7 +13,8 @@ class ViewController: UIViewController, StatefulViewController {
     var dataArray = [String]()
     let refreshControl = UIRefreshControl()
     @IBOutlet weak var tableView: UITableView!
-    
+
+  var stateInsets: UIEdgeInsets = UIEdgeInsets(top: 60, left: 20, bottom: 0, right: 0)
     override func viewDidLoad() {
         super.viewDidLoad()
         

@@ -23,7 +23,7 @@ extension StatefulViewController {
     
     public var stateMachine: ViewStateMachine {
         return associatedObject(self, key: &stateMachineKey) { [unowned self] in
-            return ViewStateMachine(view: self.backingView)
+            return ViewStateMachine(view: self.backingView, insets: self.stateInsets)
         }
     }
     
@@ -58,7 +58,12 @@ extension StatefulViewController {
         get { return placeholderView(.Empty) }
         set { setPlaceholderView(newValue, forState: .Empty) }
     }
-    
+
+    public var stateInsets: UIEdgeInsets {
+        get { return UIEdgeInsetsZero }
+        set { stateMachine.insets = newValue }
+    }
+
     
     // MARK: Transitions
     
