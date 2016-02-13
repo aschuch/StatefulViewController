@@ -9,14 +9,14 @@
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4D6451451A64079200108EA3"
-               BuildableName = "StatefulViewController.framework"
-               BlueprintName = "StatefulViewController"
+               BlueprintIdentifier = "4D64514F1A64079200108EA3"
+               BuildableName = "StatefulViewController iOS Tests.xctest"
+               BlueprintName = "StatefulViewController iOS Tests"
                ReferencedContainer = "container:Example.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4D64514F1A64079200108EA3"
+               BuildableName = "StatefulViewController iOS Tests.xctest"
+               BlueprintName = "StatefulViewController iOS Tests"
+               ReferencedContainer = "container:Example.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "4D64514F1A64079200108EA3"
+            BuildableName = "StatefulViewController iOS Tests.xctest"
+            BlueprintName = "StatefulViewController iOS Tests"
+            ReferencedContainer = "container:Example.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -45,9 +64,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4D6451451A64079200108EA3"
-            BuildableName = "StatefulViewController.framework"
-            BlueprintName = "StatefulViewController"
+            BlueprintIdentifier = "4D64514F1A64079200108EA3"
+            BuildableName = "StatefulViewController iOS Tests.xctest"
+            BlueprintName = "StatefulViewController iOS Tests"
             ReferencedContainer = "container:Example.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -60,15 +79,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4D6451451A64079200108EA3"
-            BuildableName = "StatefulViewController.framework"
-            BlueprintName = "StatefulViewController"
-            ReferencedContainer = "container:Example.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
