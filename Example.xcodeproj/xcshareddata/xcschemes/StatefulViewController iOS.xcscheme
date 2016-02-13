@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4D6451451A64079200108EA3"
-               BuildableName = "StatefulViewController iOS.framework"
+               BuildableName = "StatefulViewController.framework"
                BlueprintName = "StatefulViewController iOS"
                ReferencedContainer = "container:Example.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4D6451451A64079200108EA3"
-            BuildableName = "StatefulViewController iOS.framework"
+            BuildableName = "StatefulViewController.framework"
             BlueprintName = "StatefulViewController iOS"
             ReferencedContainer = "container:Example.xcodeproj">
          </BuildableReference>
@@ -65,7 +65,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4D6451451A64079200108EA3"
-            BuildableName = "StatefulViewController iOS.framework"
+            BuildableName = "StatefulViewController.framework"
             BlueprintName = "StatefulViewController iOS"
             ReferencedContainer = "container:Example.xcodeproj">
          </BuildableReference>
@@ -83,7 +83,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4D6451451A64079200108EA3"
-            BuildableName = "StatefulViewController iOS.framework"
+            BuildableName = "StatefulViewController.framework"
             BlueprintName = "StatefulViewController iOS"
             ReferencedContainer = "container:Example.xcodeproj">
          </BuildableReference>
