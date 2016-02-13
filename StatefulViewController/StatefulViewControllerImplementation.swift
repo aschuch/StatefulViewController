@@ -133,6 +133,7 @@ extension StatefulViewController {
 // MARK: Association
 
 private var stateMachineKey: UInt8 = 0
+private var alwaysShowLoadingViewKey: UInt8 = 1
 
 final class Associated<T> {
     let value: T
