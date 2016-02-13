@@ -100,6 +100,15 @@ extension StatefulViewController {
     
     // MARK: Content and error handling
     
+    public var alwaysShowLoadingView: Bool {
+        get {
+            return getAssociatedObject(self, associativeKey: &alwaysShowLoadingViewKey) ?? false
+        }
+        set {
+            setAssociatedObject(self, value: newValue, associativeKey: &alwaysShowLoadingViewKey, policy: .OBJC_ASSOCIATION_RETAIN)
+        }
+    }
+    
     public func hasContent() -> Bool {
         return true
     }

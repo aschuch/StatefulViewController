@@ -75,6 +75,11 @@ public protocol StatefulViewController: class, BackingViewProvider {
     
     // MARK: Content and error handling
     
+    /// A `Bool` that controls wether the `loadingView` should be shown when 
+    /// `hasContent` returns `true`.
+    /// - note: Default value is `false`
+    var alwaysShowLoadingView: Bool { get set }
+    
     /// Return true if content is available in your controller.
     ///
     /// - returns: true if there is content available in your controller.
