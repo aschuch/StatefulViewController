@@ -125,6 +125,13 @@ extension StatefulViewController {
 
 private var stateMachineKey: UInt8 = 0
 
+final class Associated<T> {
+    let value: T
+    init(_ x: T) {
+        value = x
+    }
+}
+
 private func associatedObject<T: AnyObject>(host: AnyObject, key: UnsafePointer<Void>, initial: () -> T) -> T {
     var value = objc_getAssociatedObject(host, key) as? T
     if value == nil {
@@ -132,4 +139,25 @@ private func associatedObject<T: AnyObject>(host: AnyObject, key: UnsafePointer<
         objc_setAssociatedObject(host, key, value, .OBJC_ASSOCIATION_RETAIN)
     }
     return value!
+}
+
+func setAssociatedObject<T>(object: AnyObject, value: T, associativeKey: UnsafePointer<Void>, policy: objc_AssociationPolicy) {
+    if let v: AnyObject = value as? AnyObject {
+        objc_setAssociatedObject(object, associativeKey, v,  policy)
+    }
+    else {
+        objc_setAssociatedObject(object, associativeKey, Associated(value),  policy)
+    }
+}
+
+func getAssociatedObject<T>(object: AnyObject, associativeKey: UnsafePointer<Void>) -> T? {
+    if let v = objc_getAssociatedObject(object, associativeKey) as? T {
+        return v
+    }
+    else if let v = objc_getAssociatedObject(object, associativeKey) as? Associated<T> {
+        return v.value
+    }
+    else {
+        return nil
+    }
 }
