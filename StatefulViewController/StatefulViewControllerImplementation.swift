@@ -77,6 +77,11 @@ extension StatefulViewController {
     }
     
     public func transitionViewStates(loading: Bool = false, error: ErrorType? = nil, animated: Bool = true, completion: (() -> Void)? = nil) {
+        if loading && alwaysShowLoadingView {
+            self.stateMachine.transitionToState(.View(StatefulViewControllerState.Loading.rawValue), animated: animated, completion: completion)
+            return
+        }
+        
         // Update view for content (i.e. hide all placeholder views)
         if hasContent() {
             if let e = error {
