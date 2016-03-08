@@ -134,7 +134,7 @@ github "aschuch/StatefulViewController", ~> 1.0
 
 Then run `carthage update`.
 
-#### Cocoapods
+#### CocoaPods
 
 Add the following line to your Podfile.
 
@@ -142,7 +142,7 @@ Add the following line to your Podfile.
 pod "StatefulViewController", "~> 1.0"
 ```
 
-Then run `pod install` with Cocoapods 0.36 or newer.
+Then run `pod install` with CocoaPods 0.36 or newer.
 
 #### Manually
 
