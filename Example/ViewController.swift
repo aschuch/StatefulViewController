@@ -18,14 +18,14 @@ class ViewController: UIViewController, StatefulViewController {
         super.viewDidLoad()
         
         // Setup refresh control
-        refreshControl.addTarget(self, action: Selector("refresh"), forControlEvents: .ValueChanged)
+        refreshControl.addTarget(self, action: #selector(refresh), forControlEvents: .ValueChanged)
         tableView.addSubview(refreshControl)
         
         // Setup placeholder views
         loadingView = LoadingView(frame: view.frame)
         emptyView = EmptyView(frame: view.frame)
         let failureView = ErrorView(frame: view.frame)
-        failureView.tapGestureRecognizer.addTarget(self, action: Selector("refresh"))
+        failureView.tapGestureRecognizer.addTarget(self, action: #selector(refresh))
         errorView = failureView
     }
     

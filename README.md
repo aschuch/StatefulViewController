@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/aschuch/StatefulViewController.svg)](https://travis-ci.org/aschuch/StatefulViewController)
 ![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)
-![Swift 2](https://img.shields.io/badge/Swift-2-orange.svg)
+![Swift 2.2](https://img.shields.io/badge/Swift-2.2-orange.svg)
 
 A protocol to enable `UIViewController`s or `UIView`s to present placeholder views based on content, loading, error or empty states.
 
@@ -26,18 +26,18 @@ As trivial as this flow may sound, there are a lot of cases that result in a rat
 
 First, make sure your view controller adopts to the `StatefulViewController` protocol. 
 
-```swift 
+```swift
 class MyViewController: UIViewController, StatefulViewController {
     // ...
 }
-``` 
+```
 
 Then, configure the `loadingView`, `emptyView` and `errorView` properties (provided by the `StatefulViewController` protocol) in `viewDidLoad`.
 
 ```swift
 override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     // Setup placeholder views
     loadingView = // UIView
     emptyView = // UIView
@@ -50,7 +50,7 @@ In addition, call the `setupInitialViewState()` method in `viewWillAppear:` in o
 ```swift
 override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
-        
+
     setupInitialViewState()
 }
 ```
@@ -60,7 +60,7 @@ After that, simply tell the view controller whenever content is loading and `Sta
 ```swift
 override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
-        
+
     loadDeliciousWines()
 }
 
