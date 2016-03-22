@@ -77,6 +77,11 @@ extension StatefulViewController {
     }
     
     public func transitionViewStates(loading: Bool = false, error: ErrorType? = nil, animated: Bool = true, completion: (() -> Void)? = nil) {
+        if loading && alwaysShowLoadingView {
+            self.stateMachine.transitionToState(.View(StatefulViewControllerState.Loading.rawValue), animated: animated, completion: completion)
+            return
+        }
+        
         // Update view for content (i.e. hide all placeholder views)
         if hasContent() {
             if let e = error {
@@ -99,6 +104,15 @@ extension StatefulViewController {
     
     
     // MARK: Content and error handling
+    
+    public var alwaysShowLoadingView: Bool {
+        get {
+            return getAssociatedObject(self, associativeKey: &alwaysShowLoadingViewKey) ?? false
+        }
+        set {
+            setAssociatedObject(self, value: newValue, associativeKey: &alwaysShowLoadingViewKey, policy: .OBJC_ASSOCIATION_RETAIN)
+        }
+    }
     
     public func hasContent() -> Bool {
         return true
@@ -124,6 +138,14 @@ extension StatefulViewController {
 // MARK: Association
 
 private var stateMachineKey: UInt8 = 0
+private var alwaysShowLoadingViewKey: UInt8 = 1
+
+final class Associated<T> {
+    let value: T
+    init(_ x: T) {
+        value = x
+    }
+}
 
 private func associatedObject<T: AnyObject>(host: AnyObject, key: UnsafePointer<Void>, initial: () -> T) -> T {
     var value = objc_getAssociatedObject(host, key) as? T
@@ -132,4 +154,25 @@ private func associatedObject<T: AnyObject>(host: AnyObject, key: UnsafePointer<
         objc_setAssociatedObject(host, key, value, .OBJC_ASSOCIATION_RETAIN)
     }
     return value!
+}
+
+func setAssociatedObject<T>(object: AnyObject, value: T, associativeKey: UnsafePointer<Void>, policy: objc_AssociationPolicy) {
+    if let v: AnyObject = value as? AnyObject {
+        objc_setAssociatedObject(object, associativeKey, v,  policy)
+    }
+    else {
+        objc_setAssociatedObject(object, associativeKey, Associated(value),  policy)
+    }
+}
+
+func getAssociatedObject<T>(object: AnyObject, associativeKey: UnsafePointer<Void>) -> T? {
+    if let v = objc_getAssociatedObject(object, associativeKey) as? T {
+        return v
+    }
+    else if let v = objc_getAssociatedObject(object, associativeKey) as? Associated<T> {
+        return v.value
+    }
+    else {
+        return nil
+    }
 }
