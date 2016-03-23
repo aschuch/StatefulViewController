@@ -7,7 +7,8 @@ Pod::Spec.new do |s|
   s.license           = { :type => "MIT", :file => "LICENSE" }
   s.author            = { "Alexander Schuch" => "alexander@schuch.me" }
   s.social_media_url  = "http://twitter.com/schuchalexander"
-  s.platform          = :ios, "8.0"
+  s.ios.deployment_target = "8.0"
+  s.tvos.deployment_target = "9.0"
   s.source            = { :git => "https://github.com/aschuch/StatefulViewController.git", :tag => s.version }
   s.requires_arc      = true
   s.source_files      = 'StatefulViewController/*.swift'
