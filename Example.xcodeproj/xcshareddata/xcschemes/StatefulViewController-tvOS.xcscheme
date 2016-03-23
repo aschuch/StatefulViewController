@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0720"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4D6451451A64079200108EA3"
+               BlueprintIdentifier = "523646871C6F87B000392180"
                BuildableName = "StatefulViewController.framework"
-               BlueprintName = "StatefulViewController"
+               BlueprintName = "StatefulViewController-tvOS"
                ReferencedContainer = "container:Example.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4D6451451A64079200108EA3"
+            BlueprintIdentifier = "523646871C6F87B000392180"
             BuildableName = "StatefulViewController.framework"
-            BlueprintName = "StatefulViewController"
+            BlueprintName = "StatefulViewController-tvOS"
             ReferencedContainer = "container:Example.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4D6451451A64079200108EA3"
+            BlueprintIdentifier = "523646871C6F87B000392180"
             BuildableName = "StatefulViewController.framework"
-            BlueprintName = "StatefulViewController"
+            BlueprintName = "StatefulViewController-tvOS"
             ReferencedContainer = "container:Example.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
