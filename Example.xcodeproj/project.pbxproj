@@ -73,7 +73,7 @@
 		4D6451461A64079200108EA3 /* StatefulViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StatefulViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D6451491A64079200108EA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D64514A1A64079200108EA3 /* StatefulViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StatefulViewController.h; sourceTree = "<group>"; };
-		4D6451501A64079200108EA3 /* StatefulViewController iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "StatefulViewController iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D6451501A64079200108EA3 /* StatefulViewController-iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "StatefulViewController-iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D6451581A64079300108EA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D6451591A64079300108EA3 /* StatefulViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatefulViewControllerTests.swift; sourceTree = "<group>"; };
 		4D6451661A64089800108EA3 /* StatefulViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatefulViewController.swift; sourceTree = "<group>"; };
@@ -178,7 +178,7 @@
 			children = (
 				4DE62ADC19B658610021630A /* Example.app */,
 				4D6451461A64079200108EA3 /* StatefulViewController.framework */,
-				4D6451501A64079200108EA3 /* StatefulViewController iOS Tests.xctest */,
+				4D6451501A64079200108EA3 /* StatefulViewController-iOS Tests.xctest */,
 				523646881C6F87B000392180 /* StatefulViewController.framework */,
 			);
 			name = Products;
@@ -239,9 +239,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		4D6451451A64079200108EA3 /* StatefulViewController iOS */ = {
+		4D6451451A64079200108EA3 /* StatefulViewController-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4D6451631A64079300108EA3 /* Build configuration list for PBXNativeTarget "StatefulViewController iOS" */;
+			buildConfigurationList = 4D6451631A64079300108EA3 /* Build configuration list for PBXNativeTarget "StatefulViewController-iOS" */;
 			buildPhases = (
 				4D6451411A64079200108EA3 /* Sources */,
 				4D6451421A64079200108EA3 /* Frameworks */,
@@ -252,14 +252,14 @@
 			);
 			dependencies = (
 			);
-			name = "StatefulViewController iOS";
+			name = "StatefulViewController-iOS";
 			productName = StatefulViewController;
 			productReference = 4D6451461A64079200108EA3 /* StatefulViewController.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		4D64514F1A64079200108EA3 /* StatefulViewController iOS Tests */ = {
+		4D64514F1A64079200108EA3 /* StatefulViewController-iOS Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4D6451651A64079300108EA3 /* Build configuration list for PBXNativeTarget "StatefulViewController iOS Tests" */;
+			buildConfigurationList = 4D6451651A64079300108EA3 /* Build configuration list for PBXNativeTarget "StatefulViewController-iOS Tests" */;
 			buildPhases = (
 				4D64514C1A64079200108EA3 /* Sources */,
 				4D64514D1A64079200108EA3 /* Frameworks */,
@@ -271,9 +271,9 @@
 				4D6451531A64079300108EA3 /* PBXTargetDependency */,
 				4D6451551A64079300108EA3 /* PBXTargetDependency */,
 			);
-			name = "StatefulViewController iOS Tests";
+			name = "StatefulViewController-iOS Tests";
 			productName = StatefulViewControllerTests;
-			productReference = 4D6451501A64079200108EA3 /* StatefulViewController iOS Tests.xctest */;
+			productReference = 4D6451501A64079200108EA3 /* StatefulViewController-iOS Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		4DE62ADB19B658610021630A /* Example */ = {
@@ -295,9 +295,9 @@
 			productReference = 4DE62ADC19B658610021630A /* Example.app */;
 			productType = "com.apple.product-type.application";
 		};
-		523646871C6F87B000392180 /* StatefulViewController tvOS */ = {
+		523646871C6F87B000392180 /* StatefulViewController-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5236468F1C6F87B000392180 /* Build configuration list for PBXNativeTarget "StatefulViewController tvOS" */;
+			buildConfigurationList = 5236468F1C6F87B000392180 /* Build configuration list for PBXNativeTarget "StatefulViewController-tvOS" */;
 			buildPhases = (
 				523646831C6F87B000392180 /* Sources */,
 				523646841C6F87B000392180 /* Frameworks */,
@@ -308,7 +308,7 @@
 			);
 			dependencies = (
 			);
-			name = "StatefulViewController tvOS";
+			name = "StatefulViewController-tvOS";
 			productName = "StatefulViewController tvOS";
 			productReference = 523646881C6F87B000392180 /* StatefulViewController.framework */;
 			productType = "com.apple.product-type.framework";
@@ -353,9 +353,9 @@
 			projectRoot = "";
 			targets = (
 				4DE62ADB19B658610021630A /* Example */,
-				4D6451451A64079200108EA3 /* StatefulViewController iOS */,
-				4D64514F1A64079200108EA3 /* StatefulViewController iOS Tests */,
-				523646871C6F87B000392180 /* StatefulViewController tvOS */,
+				4D6451451A64079200108EA3 /* StatefulViewController-iOS */,
+				4D64514F1A64079200108EA3 /* StatefulViewController-iOS Tests */,
+				523646871C6F87B000392180 /* StatefulViewController-tvOS */,
 			);
 		};
 /* End PBXProject section */
@@ -441,7 +441,7 @@
 /* Begin PBXTargetDependency section */
 		4D6451531A64079300108EA3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4D6451451A64079200108EA3 /* StatefulViewController iOS */;
+			target = 4D6451451A64079200108EA3 /* StatefulViewController-iOS */;
 			targetProxy = 4D6451521A64079300108EA3 /* PBXContainerItemProxy */;
 		};
 		4D6451551A64079300108EA3 /* PBXTargetDependency */ = {
@@ -451,7 +451,7 @@
 		};
 		4D64515C1A64079300108EA3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4D6451451A64079200108EA3 /* StatefulViewController iOS */;
+			target = 4D6451451A64079200108EA3 /* StatefulViewController-iOS */;
 			targetProxy = 4D64515B1A64079300108EA3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -709,7 +709,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4D6451631A64079300108EA3 /* Build configuration list for PBXNativeTarget "StatefulViewController iOS" */ = {
+		4D6451631A64079300108EA3 /* Build configuration list for PBXNativeTarget "StatefulViewController-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4D64515F1A64079300108EA3 /* Debug */,
@@ -718,7 +718,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4D6451651A64079300108EA3 /* Build configuration list for PBXNativeTarget "StatefulViewController iOS Tests" */ = {
+		4D6451651A64079300108EA3 /* Build configuration list for PBXNativeTarget "StatefulViewController-iOS Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4D6451611A64079300108EA3 /* Debug */,
@@ -745,13 +745,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5236468F1C6F87B000392180 /* Build configuration list for PBXNativeTarget "StatefulViewController tvOS" */ = {
+		5236468F1C6F87B000392180 /* Build configuration list for PBXNativeTarget "StatefulViewController-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5236468D1C6F87B000392180 /* Debug */,
 				5236468E1C6F87B000392180 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
