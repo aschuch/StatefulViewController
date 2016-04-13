@@ -149,10 +149,13 @@ public class ViewStateMachine {
             newView.alpha = animated ? 0.0 : 1.0
             newView.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview(newView)
-            
+
+            let insets = (newView as? StatefulPlaceholderView)?.placeholderViewInsets() ?? UIEdgeInsets()
+            let metrics = ["top": insets.top, "bottom": insets.bottom, "left": insets.left, "right": insets.right]
             let views = ["view": newView]
-            let hConstraints = NSLayoutConstraint.constraintsWithVisualFormat("|[view]|", options: [], metrics: nil, views: views)
-            let vConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|[view]|", options: [], metrics: nil, views: views)
+
+            let hConstraints = NSLayoutConstraint.constraintsWithVisualFormat("|-left-[view]-right-|", options: [], metrics: metrics, views: views)
+            let vConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-top-[view]-bottom-|", options: [], metrics: metrics, views: views)
             self.view.addConstraints(hConstraints)
             self.view.addConstraints(vConstraints)
         }

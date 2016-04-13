@@ -98,7 +98,24 @@ func handleErrorWhenContentAvailable(error: ErrorType) {
 }
 ```
 
+
+
+### Custom Placeholder View insets
+
+Per default, StatefulViewController presents all configured placeholder views fullscreen (i.e. with 0 insets from top, bottom, left & right from the superview). In case a placeholder view should have custom insets the configured placeholderview may conform to the `StatefulPlaceholderView` protocol and override the `placeholderViewInsets` method to return custom edge insets.
+
+```swift
+class MyPlaceholderView: UIView, StatefulPlaceholderView {
+  func placeholderViewInsets() -> UIEdgeInsets {
+	return UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+  }
+}
+```
+
+
+
 <a name="viewstatemachine"></a>
+
 ### View State Machine
 
 > Note: The following section is only intended for those, who want to create a stateful controller that differs from the flow described above.
