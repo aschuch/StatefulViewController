@@ -23,7 +23,7 @@ extension StatefulViewController {
     
     public var stateMachine: ViewStateMachine {
         return associatedObject(self, key: &stateMachineKey) { [unowned self] in
-            return ViewStateMachine(view: self.backingView)
+            return ViewStateMachine(view: self.backingView, insets: self.stateInsets)
         }
     }
     
@@ -58,11 +58,16 @@ extension StatefulViewController {
         get { return placeholderView(.Empty) }
         set { setPlaceholderView(newValue, forState: .Empty) }
     }
-    
+
+    public var stateInsets: UIEdgeInsets {
+        return UIEdgeInsetsZero
+    }
+
     
     // MARK: Transitions
     
     public func setupInitialViewState() {
+        stateMachine.insets = stateInsets
         let isLoading = (lastState == .Loading)
         let error: NSError? = (lastState == .Error) ? NSError(domain: "com.aschuch.StatefulViewController.ErrorDomain", code: -1, userInfo: nil) : nil
         transitionViewStates(isLoading, error: error, animated: false)
@@ -77,6 +82,7 @@ extension StatefulViewController {
     }
     
     public func transitionViewStates(loading: Bool = false, error: ErrorType? = nil, animated: Bool = true, completion: (() -> Void)? = nil) {
+        self.stateMachine.insets = self.stateInsets
         // Update view for content (i.e. hide all placeholder views)
         if hasContent() {
             if let e = error {

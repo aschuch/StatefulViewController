@@ -42,6 +42,8 @@ public protocol StatefulViewController: class, BackingViewProvider {
     /// The empty view is shown when the `hasContent` method returns false
     var emptyView: UIView? { get set }
 
+    var stateInsets: UIEdgeInsets { get }
+
     
     // MARK: Transitions
 

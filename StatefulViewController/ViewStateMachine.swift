@@ -34,19 +34,21 @@ public func == (lhs: ViewStateMachineState, rhs: ViewStateMachineState) -> Bool 
 public class ViewStateMachine {
     private var viewStore: [String: UIView]
     private let queue = dispatch_queue_create("com.aschuch.viewStateMachine.queue", DISPATCH_QUEUE_SERIAL)
-    
+
     /// The view that should act as the superview for any added views
     public let view: UIView
-    
+
+    public var insets: UIEdgeInsets
+
     /// The current display state of views
     public private(set) var currentState: ViewStateMachineState = .None
-    
+
     /// The last state that was enqueued
     public private(set) var lastState: ViewStateMachineState = .None
-    
-    
+
+
     // MARK: Init
-    
+
     ///  Designated initializer.
     ///
     /// - parameter view:		The view that should act as the superview for any added views
@@ -54,40 +56,41 @@ public class ViewStateMachine {
     ///
     /// - returns:			A view state machine with the given views for states
     ///
-    public init(view: UIView, states: [String: UIView]?) {
+    public init(view: UIView, states: [String: UIView]?, insets: UIEdgeInsets = UIEdgeInsetsZero) {
         self.view = view
+        self.insets = insets
         viewStore = states ?? [String: UIView]()
     }
-    
+
     /// - parameter view:		The view that should act as the superview for any added views
     ///
     /// - returns:			A view state machine
     ///
-    public convenience init(view: UIView) {
-        self.init(view: view, states: nil)
+    public convenience init(view: UIView, insets: UIEdgeInsets) {
+        self.init(view: view, states: nil, insets: insets)
     }
-    
-    
+
+
     // MARK: Add and remove view states
-    
+
     /// - returns: the view for a given state
     public func viewForState(state: String) -> UIView? {
         return viewStore[state]
     }
-    
+
     /// Associates a view for the given state
     public func addView(view: UIView, forState state: String) {
         viewStore[state] = view
     }
-    
+
     ///  Removes the view for the given state
     public func removeViewForState(state: String) {
         viewStore[state] = nil
     }
-    
-    
+
+
     // MARK: Subscripting
-    
+
     public subscript(state: String) -> UIView? {
         get {
             return viewForState(state)
@@ -100,10 +103,10 @@ public class ViewStateMachine {
             }
         }
     }
-    
-    
+
+
     // MARK: Switch view state
-    
+
     /// Adds and removes views to and from the `view` based on the given state.
     /// Animations are synchronized in order to make sure that there aren't any animation gliches in the UI
     ///
@@ -113,21 +116,21 @@ public class ViewStateMachine {
     ///
     public func transitionToState(state: ViewStateMachineState, animated: Bool = true, completion: (() -> ())? = nil) {
         lastState = state
-        
+
         dispatch_async(queue) {
             if state == self.currentState {
                 return
             }
-            
+
             // Suspend the queue, it will be resumed in the completion block
             dispatch_suspend(self.queue)
             self.currentState = state
-            
+
             let c: () -> () = {
                 dispatch_resume(self.queue)
                 completion?()
             }
-            
+
             // Switch state and update the view
             dispatch_sync(dispatch_get_main_queue()) {
                 switch state {
@@ -139,61 +142,61 @@ public class ViewStateMachine {
             }
         }
     }
-    
-    
+
+
     // MARK: Private view updates
-    
+
     private func showViewWithKey(state: String, animated: Bool, completion: (() -> ())? = nil) {
         if let newView = self.viewStore[state] {
             // Add new view using AutoLayout
             newView.alpha = animated ? 0.0 : 1.0
             newView.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview(newView)
-            
+
             let views = ["view": newView]
-            let hConstraints = NSLayoutConstraint.constraintsWithVisualFormat("|[view]|", options: [], metrics: nil, views: views)
-            let vConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|[view]|", options: [], metrics: nil, views: views)
+            let hConstraints = NSLayoutConstraint.constraintsWithVisualFormat("|-\(insets.left)-[view]-\(insets.right)-|", options: [], metrics: nil, views: views)
+            let vConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-\(insets.top)-[view]-\(insets.bottom)-|", options: [], metrics: nil, views: views)
             self.view.addConstraints(hConstraints)
             self.view.addConstraints(vConstraints)
         }
-        
+
         let animations: () -> () = {
             if let newView = self.viewStore[state] {
                 newView.alpha = 1.0
             }
         }
-        
+
         let animationCompletion: (Bool) -> () = { (finished) in
             for (key, view) in self.viewStore {
                 if !(key == state) {
                     view.removeFromSuperview()
                 }
             }
-            
+
             completion?()
         }
-        
+
         animateChanges(animated: animated, animations: animations, animationCompletion: animationCompletion)
     }
-    
+
     private func hideAllViews(animated animated: Bool, completion: (() -> ())? = nil) {
         let animations: () -> () = {
             for (_, view) in self.viewStore {
                 view.alpha = 0.0
             }
         }
-        
+
         let animationCompletion: (Bool) -> () = { (finished) in
             for (_, view) in self.viewStore {
                 view.removeFromSuperview()
             }
-            
+
             completion?()
         }
-        
+
         animateChanges(animated: animated, animations: animations, animationCompletion: animationCompletion)
     }
-    
+
     private func animateChanges(animated animated: Bool, animations: () -> (), animationCompletion: (Bool) -> ()) {
         if animated {
             UIView.animateWithDuration(0.3, animations: animations, completion: animationCompletion)

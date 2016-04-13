@@ -76,9 +76,9 @@
 		4D6451501A64079200108EA3 /* StatefulViewController-iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "StatefulViewController-iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D6451581A64079300108EA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D6451591A64079300108EA3 /* StatefulViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatefulViewControllerTests.swift; sourceTree = "<group>"; };
-		4D6451661A64089800108EA3 /* StatefulViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatefulViewController.swift; sourceTree = "<group>"; };
-		4D6451671A64089800108EA3 /* ViewStateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewStateMachine.swift; sourceTree = "<group>"; };
-		4DC230DC1BB5BA810083B95A /* StatefulViewControllerImplementation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatefulViewControllerImplementation.swift; sourceTree = "<group>"; };
+		4D6451661A64089800108EA3 /* StatefulViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = StatefulViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
+		4D6451671A64089800108EA3 /* ViewStateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ViewStateMachine.swift; sourceTree = "<group>"; tabWidth = 4; };
+		4DC230DC1BB5BA810083B95A /* StatefulViewControllerImplementation.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = StatefulViewControllerImplementation.swift; sourceTree = "<group>"; tabWidth = 4; };
 		4DE62ADC19B658610021630A /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DE62AE019B658610021630A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DE62AE119B658610021630A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
