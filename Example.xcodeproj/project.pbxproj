@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4D137EB819C1BE5700AC1050 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D137EB619C1BE5700AC1050 /* LaunchScreen.xib */; };
+		4D4ECAD51CBE8B32000CF6FA /* StatefulPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4ECAD31CBE89EA000CF6FA /* StatefulPlaceholderView.swift */; };
+		4D4ECAD61CBE8B33000CF6FA /* StatefulPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4ECAD31CBE89EA000CF6FA /* StatefulPlaceholderView.swift */; };
 		4D64514B1A64079200108EA3 /* StatefulViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D64514A1A64079200108EA3 /* StatefulViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4D6451511A64079300108EA3 /* StatefulViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D6451461A64079200108EA3 /* StatefulViewController.framework */; };
 		4D64515A1A64079300108EA3 /* StatefulViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6451591A64079300108EA3 /* StatefulViewControllerTests.swift */; };
@@ -70,6 +72,7 @@
 
 /* Begin PBXFileReference section */
 		4D137EB719C1BE5700AC1050 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		4D4ECAD31CBE89EA000CF6FA /* StatefulPlaceholderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatefulPlaceholderView.swift; sourceTree = "<group>"; };
 		4D6451461A64079200108EA3 /* StatefulViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StatefulViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D6451491A64079200108EA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D64514A1A64079200108EA3 /* StatefulViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StatefulViewController.h; sourceTree = "<group>"; };
@@ -132,6 +135,7 @@
 				4D6451661A64089800108EA3 /* StatefulViewController.swift */,
 				4DC230DC1BB5BA810083B95A /* StatefulViewControllerImplementation.swift */,
 				4D6451671A64089800108EA3 /* ViewStateMachine.swift */,
+				4D4ECAD31CBE89EA000CF6FA /* StatefulPlaceholderView.swift */,
 				4D64514A1A64079200108EA3 /* StatefulViewController.h */,
 				4D6451481A64079200108EA3 /* Supporting Files */,
 			);
@@ -401,6 +405,7 @@
 			files = (
 				4DC230DD1BB5BA810083B95A /* StatefulViewControllerImplementation.swift in Sources */,
 				4D6451691A64089800108EA3 /* ViewStateMachine.swift in Sources */,
+				4D4ECAD51CBE8B32000CF6FA /* StatefulPlaceholderView.swift in Sources */,
 				4D6451681A64089800108EA3 /* StatefulViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -432,6 +437,7 @@
 			files = (
 				523646921C6F88CF00392180 /* StatefulViewControllerImplementation.swift in Sources */,
 				523646931C6F88CF00392180 /* ViewStateMachine.swift in Sources */,
+				4D4ECAD61CBE8B33000CF6FA /* StatefulPlaceholderView.swift in Sources */,
 				523646911C6F88CF00392180 /* StatefulViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
