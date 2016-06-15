@@ -62,10 +62,10 @@ extension StatefulViewController {
     
     // MARK: Transitions
     
-    public func setupInitialViewState() {
+    public func setupInitialViewState(completion: (() -> Void)? = nil) {
         let isLoading = (lastState == .Loading)
         let error: NSError? = (lastState == .Error) ? NSError(domain: "com.aschuch.StatefulViewController.ErrorDomain", code: -1, userInfo: nil) : nil
-        transitionViewStates(isLoading, error: error, animated: false)
+        transitionViewStates(isLoading, error: error, animated: false, completion: completion)
     }
     
     public func startLoading(animated: Bool = false, completion: (() -> Void)? = nil) {

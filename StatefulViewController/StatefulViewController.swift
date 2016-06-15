@@ -48,7 +48,7 @@ public protocol StatefulViewController: class, BackingViewProvider {
     /// Sets up the initial state of the view.
     /// This method should be called as soon as possible in a view or view controller's
     /// life cycle, e.g. `viewWillAppear:`, to transition to the appropriate state.
-    func setupInitialViewState()
+    func setupInitialViewState(completion: (() -> Void)?)
     
     /// Transitions the controller to the loading state and shows
     /// the loading view if there is no content shown already.
