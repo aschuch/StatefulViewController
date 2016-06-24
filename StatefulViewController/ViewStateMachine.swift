@@ -235,7 +235,10 @@ public class ContainerViewStateMachine: ViewStateMachine {
     }
     
     private override func hideAllViews(animated animated: Bool, completion: (() -> ())?) {
-        self.view.removeFromSuperview()
+        super.hideAllViews(animated: animated) {
+            completion?()
+            self.view.removeFromSuperview()
+        }
     }
 }
 
