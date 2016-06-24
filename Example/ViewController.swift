@@ -45,18 +45,18 @@ class ViewController: UITableViewController, StatefulViewController {
         // Fake network call
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
             // Success
-            self.dataArray = ["Merlot", "Sauvignon Blanc", "Blaufränkisch", "Pinot Nior"]
-            self.tableView.reloadData()
-            self.endLoading(error: nil, completion: {
-                print("completion endLoading -> loadingState: \(self.currentState.rawValue)")
-            })
-            print("endLoading -> loadingState: \(self.lastState.rawValue)")
+//            self.dataArray = ["Merlot", "Sauvignon Blanc", "Blaufränkisch", "Pinot Nior"]
+//            self.tableView.reloadData()
+//            self.endLoading(error: nil, completion: {
+//                print("completion endLoading -> loadingState: \(self.currentState.rawValue)")
+//            })
+//            print("endLoading -> loadingState: \(self.lastState.rawValue)")
             
             // Error
 //            self.endLoading(error: NSError(domain: "foo", code: -1, userInfo: nil))
             
             // No Content
-//            self.endLoading(error: nil)
+            self.endLoading(error: nil)
             
             self.refreshControl?.endRefreshing()
         }

@@ -221,6 +221,7 @@ public class ContainerViewStateMachine: ViewStateMachine {
         self.containerSuperview = view
         
         let containerView = StateViewContainerView(frame: self.containerSuperview.frame)
+        containerView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         containerView.backgroundColor = UIColor.clearColor()
         containerView.layer.zPosition = self.containerSuperview.layer.zPosition + 1.0
         
