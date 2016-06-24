@@ -34,7 +34,7 @@ class LoadingView: BasicPlaceholderView, StatefulPlaceholderView {
 
 		centerView.addConstraints(hConstraints)
 		centerView.addConstraints(vConstraintsLabel)
-		centerView.addConstraints(vConstraintsActivity)
+		centerView.addConstraints(vConstraintsActivity)        
 	}
 
     func placeholderViewInsets() -> UIEdgeInsets {

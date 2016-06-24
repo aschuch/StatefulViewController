@@ -9,17 +9,15 @@
 import UIKit
 import StatefulViewController
 
-class ViewController: UIViewController, StatefulViewController {
+class ViewController: UITableViewController, StatefulViewController {
     var dataArray = [String]()
-    let refreshControl = UIRefreshControl()
-    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Setup refresh control
-        refreshControl.addTarget(self, action: #selector(refresh), forControlEvents: .ValueChanged)
-        tableView.addSubview(refreshControl)
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(refresh), forControlEvents: .ValueChanged)
         
         // Setup placeholder views
         loadingView = LoadingView(frame: view.frame)
@@ -40,7 +38,7 @@ class ViewController: UIViewController, StatefulViewController {
         if (lastState == .Loading) { return }
         
         startLoading(completion: {
-            print("completaion startLoading -> loadingState: \(self.currentState.rawValue)")
+            print("completion startLoading -> loadingState: \(self.currentState.rawValue)")
         })
         print("startLoading -> loadingState: \(self.lastState.rawValue)")
         
@@ -55,12 +53,12 @@ class ViewController: UIViewController, StatefulViewController {
             print("endLoading -> loadingState: \(self.lastState.rawValue)")
             
             // Error
-            //self.endLoading(error: NSError(domain: "foo", code: -1, userInfo: nil))
+//            self.endLoading(error: NSError(domain: "foo", code: -1, userInfo: nil))
             
             // No Content
-            //self.endLoading(error: nil)
+//            self.endLoading(error: nil)
             
-            self.refreshControl.endRefreshing()
+            self.refreshControl?.endRefreshing()
         }
     }
     
@@ -82,16 +80,21 @@ extension ViewController {
 }
 
 
-extension ViewController: UITableViewDataSource {
+extension ViewController {
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataArray.count
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataArray.count + 1
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("textCell", forIndexPath: indexPath) 
-        cell.textLabel?.text = dataArray[indexPath.row]
+        cell.textLabel?.text = "HELLO!"
+//        dataArray[indexPath.row]
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print("CLICKED ROW!")
     }
     
 }

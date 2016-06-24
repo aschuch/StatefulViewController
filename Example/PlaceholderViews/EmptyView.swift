@@ -15,7 +15,7 @@ class EmptyView: BasicPlaceholderView {
 	override func setupView() {
 		super.setupView()
 		
-		backgroundColor = UIColor.whiteColor()
+		backgroundColor = UIColor.blueColor()
 		
 		label.text = "No Content."
 		label.translatesAutoresizingMaskIntoConstraints = false
@@ -26,7 +26,7 @@ class EmptyView: BasicPlaceholderView {
 		let vConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[label]-|", options: .AlignAllCenterX, metrics: nil, views: views)
 
 		centerView.addConstraints(hConstraints)
-		centerView.addConstraints(vConstraints)
+		centerView.addConstraints(vConstraints)        
 	}
 	
 }
