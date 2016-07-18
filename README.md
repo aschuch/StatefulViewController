@@ -147,7 +147,7 @@ stateMachine.transitionToState(.None, animated: true) {
 Add the following line to your [Cartfile](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile).
 
 ```
-github "aschuch/StatefulViewController", ~> 1.0
+github "aschuch/StatefulViewController" ~> 1.0
 ```
 
 Then run `carthage update`.
