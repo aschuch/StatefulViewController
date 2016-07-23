@@ -149,7 +149,7 @@ public class ViewStateMachine {
             newView.alpha = animated ? 0.0 : 1.0
             newView.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview(newView)
-
+            
             let insets = (newView as? StatefulPlaceholderView)?.placeholderViewInsets() ?? UIEdgeInsets()
             let metrics = ["top": insets.top, "bottom": insets.bottom, "left": insets.left, "right": insets.right]
             let views = ["view": newView]
@@ -204,4 +204,55 @@ public class ViewStateMachine {
             animationCompletion(true)
         }
     }
+}
+
+///
+/// A state machine that manages a set of views by adding the state's view to a managed container view.
+///
+/// There are two possible states:
+///		* Show a specific placeholder view, represented by a key
+///		* Hide all managed views
+///
+public class ContainerViewStateMachine: ViewStateMachine {
+    
+    private let containerSuperview: UIView
+    
+    public override init(view: UIView, states: [String : UIView]?) {
+        self.containerSuperview = view
+        
+        let containerView = StateViewContainerView(frame: self.containerSuperview.frame)
+        containerView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        containerView.backgroundColor = UIColor.clearColor()
+        containerView.layer.zPosition = self.containerSuperview.layer.zPosition + 1.0
+        
+        super.init(view: containerView, states: states)
+    }
+    
+    private override func showViewWithKey(state: String, animated: Bool, completion: (() -> ())?) {
+        self.view.frame = self.containerSuperview.frame
+        self.containerSuperview.addSubview(self.view)
+        
+        super.showViewWithKey(state, animated: animated, completion: completion)
+    }
+    
+    private override func hideAllViews(animated animated: Bool, completion: (() -> ())?) {
+        super.hideAllViews(animated: animated) {
+            completion?()
+            self.view.removeFromSuperview()
+        }
+    }
+}
+
+private class StateViewContainerView: UIView {
+    
+    private override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
+        for view in self.subviews {
+            if !view.hidden && view.alpha > 0 && view.userInteractionEnabled &&
+                view.pointInside(self.convertPoint(point, toView:view), withEvent:event) {
+                return true
+            }
+        }
+        return false
+    }
+    
 }

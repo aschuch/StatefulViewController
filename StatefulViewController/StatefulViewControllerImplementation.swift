@@ -15,7 +15,6 @@ extension BackingViewProvider where Self: UIView {
     }
 }
 
-
 // MARK: Default Implementation StatefulViewController
 
 /// Default implementation of StatefulViewController for UIViewController
@@ -120,10 +119,21 @@ extension StatefulViewController {
     }
 }
 
+extension StatefulViewController where Self: UITableViewController {
+    
+    public var stateMachine: ViewStateMachine {
+        return associatedObject(self, key: &stateMachineKey) { [unowned self] in
+            return ContainerViewStateMachine(view: self.view)
+        }
+    }
+    
+}
+
 
 // MARK: Association
 
 private var stateMachineKey: UInt8 = 0
+private var tableViewControllerStateContainerViewKey: UInt8 = 1
 
 private func associatedObject<T: AnyObject>(host: AnyObject, key: UnsafePointer<Void>, initial: () -> T) -> T {
     var value = objc_getAssociatedObject(host, key) as? T
