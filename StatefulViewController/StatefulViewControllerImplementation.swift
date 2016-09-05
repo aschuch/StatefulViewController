@@ -65,18 +65,18 @@ extension StatefulViewController {
     public func setupInitialViewState(_ completion: (() -> Void)? = nil) {
         let isLoading = (lastState == .Loading)
         let error: NSError? = (lastState == .Error) ? NSError(domain: "com.aschuch.StatefulViewController.ErrorDomain", code: -1, userInfo: nil) : nil
-        transitionViewStates(isLoading, error: error, animated: false, completion: completion)
+        transitionViewStates(loading: isLoading, error: error, animated: false, completion: completion)
     }
     
-    public func startLoading(_ animated: Bool = false, completion: (() -> Void)? = nil) {
-        transitionViewStates(true, animated: animated, completion: completion)
+    public func startLoading(animated: Bool = false, completion: (() -> Void)? = nil) {
+        transitionViewStates(loading: true, animated: animated, completion: completion)
     }
     
-    public func endLoading(_ animated: Bool = true, error: Error? = nil, completion: (() -> Void)? = nil) {
-        transitionViewStates(false, error: error, animated: animated, completion: completion)
+    public func endLoading(animated: Bool = true, error: Error? = nil, completion: (() -> Void)? = nil) {
+        transitionViewStates(loading: false, error: error, animated: animated, completion: completion)
     }
     
-    public func transitionViewStates(_ loading: Bool = false, error: Error? = nil, animated: Bool = true, completion: (() -> Void)? = nil) {
+    public func transitionViewStates(loading: Bool = false, error: Error? = nil, animated: Bool = true, completion: (() -> Void)? = nil) {
         // Update view for content (i.e. hide all placeholder views)
         if hasContent() {
             if let e = error {

@@ -39,9 +39,9 @@ class ViewController: UIViewController, StatefulViewController {
     func refresh() {
         if (lastState == .Loading) { return }
         
-        startLoading(completion: {
+        startLoading {
             print("completaion startLoading -> loadingState: \(self.currentState.rawValue)")
-        })
+        }
         print("startLoading -> loadingState: \(self.lastState.rawValue)")
         
         // Fake network call
