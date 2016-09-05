@@ -5,6 +5,9 @@
 ![Swift 2.2](https://img.shields.io/badge/Swift-2.2-orange.svg)
 ![Platform](https://img.shields.io/badge/platform-iOS%20%7C%20tvOS-lightgrey.svg)
 
+> This project is [Migrating to Swift 3](http://www.jessesquires.com/migrating-to-swift-3/).
+> Swift 2.3 is currently available from the [`swift2.3` branch](https://github.com/aschuch/StatefulViewController/tree/swift2.3)
+
 A protocol to enable `UIViewController`s or `UIView`s to present placeholder views based on content, loading, error or empty states.
 
 ![StatefulViewController Example](Resources/example.gif)
@@ -25,7 +28,7 @@ As trivial as this flow may sound, there are a lot of cases that result in a rat
 ## Usage
 > This guide describes the use of the `StatefulViewController` protocol on `UIViewController`. However, you can also adopt the `StatefulViewController` protocol on any `UIViewController` subclass, such as `UITableViewController` or `UICollectionViewController`, as well as your custom `UIView` subclasses.
 
-First, make sure your view controller adopts to the `StatefulViewController` protocol. 
+First, make sure your view controller adopts to the `StatefulViewController` protocol.
 
 ```swift
 class MyViewController: UIViewController, StatefulViewController {
@@ -67,7 +70,7 @@ override func viewWillAppear(animated: Bool) {
 
 func loadDeliciousWines() {
 	startLoading()
-	
+
 	let url = NSURL(string: "http://example.com/api")
 	let session = NSURLSession.sharedSession()
 	session.dataTaskWithURL(url) { (let data, let response, let error) in
