@@ -15,15 +15,15 @@ class EmptyView: BasicPlaceholderView {
 	override func setupView() {
 		super.setupView()
 		
-		backgroundColor = UIColor.whiteColor()
+		backgroundColor = UIColor.white
 		
 		label.text = "No Content."
 		label.translatesAutoresizingMaskIntoConstraints = false
 		centerView.addSubview(label)
 		
 		let views = ["label": label]
-		let hConstraints = NSLayoutConstraint.constraintsWithVisualFormat("|-[label]-|", options: .AlignAllCenterY, metrics: nil, views: views)
-		let vConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[label]-|", options: .AlignAllCenterX, metrics: nil, views: views)
+		let hConstraints = NSLayoutConstraint.constraints(withVisualFormat: "|-[label]-|", options: .alignAllCenterY, metrics: nil, views: views)
+		let vConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-[label]-|", options: .alignAllCenterX, metrics: nil, views: views)
 
 		centerView.addConstraints(hConstraints)
 		centerView.addConstraints(vConstraints)

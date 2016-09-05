@@ -25,18 +25,18 @@ class BasicPlaceholderView: UIView {
 	}
 	
 	func setupView() {
-		backgroundColor = UIColor.whiteColor()
+		backgroundColor = UIColor.white
 		
 		centerView.translatesAutoresizingMaskIntoConstraints = false
 		self.addSubview(centerView)
 		
 		let views = ["centerView": centerView, "superview": self]
-		let vConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:[superview]-(<=1)-[centerView]",
-			options: .AlignAllCenterX,
+		let vConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:[superview]-(<=1)-[centerView]",
+			options: .alignAllCenterX,
 			metrics: nil,
 			views: views)
-		let hConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:[superview]-(<=1)-[centerView]",
-			options: .AlignAllCenterY,
+		let hConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:[superview]-(<=1)-[centerView]",
+			options: .alignAllCenterY,
 			metrics: nil,
 			views: views)
 		self.addConstraints(vConstraints)

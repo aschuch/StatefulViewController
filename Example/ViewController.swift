@@ -18,7 +18,7 @@ class ViewController: UIViewController, StatefulViewController {
         super.viewDidLoad()
         
         // Setup refresh control
-        refreshControl.addTarget(self, action: #selector(refresh), forControlEvents: .ValueChanged)
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         tableView.addSubview(refreshControl)
         
         // Setup placeholder views
@@ -29,7 +29,7 @@ class ViewController: UIViewController, StatefulViewController {
         errorView = failureView
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         setupInitialViewState()
@@ -45,7 +45,7 @@ class ViewController: UIViewController, StatefulViewController {
         print("startLoading -> loadingState: \(self.lastState.rawValue)")
         
         // Fake network call
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(3 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
             // Success
             self.dataArray = ["Merlot", "Sauvignon Blanc", "Blaufränkisch", "Pinot Nior"]
             self.tableView.reloadData()
@@ -73,10 +73,10 @@ extension ViewController {
         return dataArray.count > 0
     }
     
-    func handleErrorWhenContentAvailable(error: ErrorType) {
-        let alertController = UIAlertController(title: "Ooops", message: "Something went wrong.", preferredStyle: .Alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-        self.presentViewController(alertController, animated: true, completion: nil)
+    func handleErrorWhenContentAvailable(_ error: Error) {
+        let alertController = UIAlertController(title: "Ooops", message: "Something went wrong.", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
     }
     
 }
@@ -84,13 +84,13 @@ extension ViewController {
 
 extension ViewController: UITableViewDataSource {
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataArray.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("textCell", forIndexPath: indexPath) 
-        cell.textLabel?.text = dataArray[indexPath.row]
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "textCell", for: indexPath) 
+        cell.textLabel?.text = dataArray[(indexPath as NSIndexPath).row]
         return cell
     }
     
