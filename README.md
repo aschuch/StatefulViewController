@@ -5,10 +5,6 @@
 ![Swift 2.3](https://img.shields.io/badge/Swift-2.3-orange.svg)
 ![Platform](https://img.shields.io/badge/platform-iOS%20%7C%20tvOS-lightgrey.svg)
 
-> This project is [Migrating to Swift 3](http://www.jessesquires.com/migrating-to-swift-3/).
-> * Swift 2.3 is currently available from the [`swift2.3` branch](https://github.com/aschuch/StatefulViewController/tree/swift2.3)
-> * Swift 3.0 is currently available from the [`swift3.0` branch](https://github.com/aschuch/StatefulViewController/tree/swift3.0)
-
 A protocol to enable `UIViewController`s or `UIView`s to present placeholder views based on content, loading, error or empty states.
 
 ![StatefulViewController Example](Resources/example.gif)
