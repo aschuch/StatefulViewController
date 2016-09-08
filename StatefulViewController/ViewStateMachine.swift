@@ -197,7 +197,7 @@ public class ViewStateMachine {
         animateChanges(animated: animated, animations: animations, completion: animationCompletion)
     }
     
-    fileprivate func animateChanges(animated: Bool, animations: @escaping () -> (), completion: (@escaping (Bool) -> Void)?) {
+    fileprivate func animateChanges(animated: Bool, animations: @escaping () -> (), completion: ((Bool) -> Void)?) {
         if animated {
             UIView.animate(withDuration: 0.3, animations: animations, completion: completion)
         } else {
