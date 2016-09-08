@@ -29,15 +29,15 @@ extension StatefulViewController {
     
     public var currentState: StatefulViewControllerState {
         switch stateMachine.currentState {
-        case .None: return .Content
-        case .View(let viewKey): return StatefulViewControllerState(rawValue: viewKey)!
+        case .none: return .Content
+        case .view(let viewKey): return StatefulViewControllerState(rawValue: viewKey)!
         }
     }
     
     public var lastState: StatefulViewControllerState {
         switch stateMachine.lastState {
-        case .None: return .Content
-        case .View(let viewKey): return StatefulViewControllerState(rawValue: viewKey)!
+        case .none: return .Content
+        case .view(let viewKey): return StatefulViewControllerState(rawValue: viewKey)!
         }
     }
     
@@ -62,28 +62,28 @@ extension StatefulViewController {
     
     // MARK: Transitions
     
-    public func setupInitialViewState(completion: (() -> Void)? = nil) {
+    public func setupInitialViewState(_ completion: (() -> Void)? = nil) {
         let isLoading = (lastState == .Loading)
         let error: NSError? = (lastState == .Error) ? NSError(domain: "com.aschuch.StatefulViewController.ErrorDomain", code: -1, userInfo: nil) : nil
-        transitionViewStates(isLoading, error: error, animated: false, completion: completion)
+        transitionViewStates(loading: isLoading, error: error, animated: false, completion: completion)
     }
     
     public func startLoading(animated: Bool = false, completion: (() -> Void)? = nil) {
-        transitionViewStates(true, animated: animated, completion: completion)
+        transitionViewStates(loading: true, animated: animated, completion: completion)
     }
     
-    public func endLoading(animated: Bool = true, error: ErrorType? = nil, completion: (() -> Void)? = nil) {
-        transitionViewStates(false, animated: animated, error: error, completion: completion)
+    public func endLoading(animated: Bool = true, error: Error? = nil, completion: (() -> Void)? = nil) {
+        transitionViewStates(loading: false, error: error, animated: animated, completion: completion)
     }
     
-    public func transitionViewStates(loading: Bool = false, error: ErrorType? = nil, animated: Bool = true, completion: (() -> Void)? = nil) {
+    public func transitionViewStates(loading: Bool = false, error: Error? = nil, animated: Bool = true, completion: (() -> Void)? = nil) {
         // Update view for content (i.e. hide all placeholder views)
         if hasContent() {
             if let e = error {
                 // show unobstrusive error
                 handleErrorWhenContentAvailable(e)
             }
-            self.stateMachine.transitionToState(.None, animated: animated, completion: completion)
+            self.stateMachine.transitionToState(.none, animated: animated, completion: completion)
             return
         }
         
@@ -94,7 +94,7 @@ extension StatefulViewController {
         } else if let _ = error {
             newState = .Error
         }
-        self.stateMachine.transitionToState(.View(newState.rawValue), animated: animated, completion: completion)
+        self.stateMachine.transitionToState(.view(newState.rawValue), animated: animated, completion: completion)
     }
     
     
@@ -104,18 +104,18 @@ extension StatefulViewController {
         return true
     }
     
-    public func handleErrorWhenContentAvailable(error: ErrorType) {
+    public func handleErrorWhenContentAvailable(_ error: Error) {
         // Default implementation does nothing.
     }
     
     
     // MARK: Helper
     
-    private func placeholderView(state: StatefulViewControllerState) -> UIView? {
+    fileprivate func placeholderView(_ state: StatefulViewControllerState) -> UIView? {
         return stateMachine[state.rawValue]
     }
     
-    private func setPlaceholderView(view: UIView?, forState state: StatefulViewControllerState) {
+    fileprivate func setPlaceholderView(_ view: UIView?, forState state: StatefulViewControllerState) {
         stateMachine[state.rawValue] = view
     }
 }
@@ -125,7 +125,7 @@ extension StatefulViewController {
 
 private var stateMachineKey: UInt8 = 0
 
-private func associatedObject<T: AnyObject>(host: AnyObject, key: UnsafePointer<Void>, initial: () -> T) -> T {
+private func associatedObject<T: AnyObject>(_ host: AnyObject, key: UnsafeRawPointer, initial: () -> T) -> T {
     var value = objc_getAssociatedObject(host, key) as? T
     if value == nil {
         value = initial()

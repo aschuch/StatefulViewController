@@ -20,14 +20,14 @@ class StatefulViewControllerTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        errorView = UIView(frame: CGRectMake(0, 0, 320, 480))
-        errorView.backgroundColor = UIColor.redColor()
+        errorView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
+        errorView.backgroundColor = UIColor.red
         
-        loadingView = UIView(frame: CGRectMake(0, 0, 320, 480))
-        loadingView.backgroundColor = UIColor.blueColor()
+        loadingView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
+        loadingView.backgroundColor = UIColor.blue
         
-        emptyView = UIView(frame: CGRectMake(0, 0, 320, 480))
-        emptyView.backgroundColor = UIColor.grayColor()
+        emptyView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
+        emptyView.backgroundColor = UIColor.gray
         
         stateMachine.addView(errorView, forState: "error")
         stateMachine.addView(loadingView, forState: "loading")
@@ -40,25 +40,25 @@ class StatefulViewControllerTests: XCTestCase {
     }
     
     func testStateMachine() {
-        stateMachine.transitionToState(.View("error"), animated: true) {
+        stateMachine.transitionToState(.view("error"), animated: true) {
             XCTAssertTrue(self.errorView.superview === self.stateMachine.view, "")
             XCTAssertNil(self.loadingView.superview, "")
             XCTAssertNil(self.emptyView.superview, "")
         }
         
-        stateMachine.transitionToState(.View("loading"), animated: true) {
+        stateMachine.transitionToState(.view("loading"), animated: true) {
             XCTAssertNil(self.errorView.superview, "")
             XCTAssertTrue(self.loadingView.superview === self.stateMachine.view, "")
             XCTAssertNil(self.emptyView.superview, "")
         }
         
-        stateMachine.transitionToState(.None, animated: true) {
+        stateMachine.transitionToState(.none, animated: true) {
             XCTAssertNil(self.errorView.superview, "")
             XCTAssertNil(self.loadingView.superview, "")
             XCTAssertNil(self.emptyView.superview, "")
         }
         
-        stateMachine.transitionToState(.View("empty"), animated: true) {
+        stateMachine.transitionToState(.view("empty"), animated: true) {
             XCTAssertNil(self.errorView.superview, "")
             XCTAssertNil(self.loadingView.superview, "")
             XCTAssertFalse(self.emptyView.superview === self.stateMachine.view, "")
