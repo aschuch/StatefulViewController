@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name              = "StatefulViewController"
-  s.version           = "2.0"
+  s.version           = "3.0"
   s.summary           = "Placeholder views based on content, loading, error or empty states"
   s.description       = "A view controller subclass that presents placeholder views based on content, loading, error or empty states."
   s.homepage          = "https://github.com/aschuch/StatefulViewController"
