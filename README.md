@@ -162,7 +162,7 @@ stateMachine.transitionToState(.None, animated: true) {
 Add the following line to your [Cartfile](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile).
 
 ```
-github "aschuch/StatefulViewController" ~> 1.0
+github "aschuch/StatefulViewController" ~> 3.0
 ```
 
 Then run `carthage update`.
@@ -172,7 +172,7 @@ Then run `carthage update`.
 Add the following line to your Podfile.
 
 ```
-pod "StatefulViewController", "~> 1.0"
+pod "StatefulViewController", "~> 3.0"
 ```
 
 Then run `pod install` with CocoaPods 0.36 or newer.
