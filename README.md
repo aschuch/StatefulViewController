@@ -121,9 +121,9 @@ Per default, StatefulViewController presents all configured placeholder views fu
 
 ```swift
 class MyPlaceholderView: UIView, StatefulPlaceholderView {
-  func placeholderViewInsets() -> UIEdgeInsets {
-	return UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-  }
+	func placeholderViewInsets() -> UIEdgeInsets {
+		return UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+  	}
 }
 ```
 
