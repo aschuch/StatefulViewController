@@ -164,6 +164,11 @@ public class ViewStateMachine {
             if let newView = self.viewStore[state] {
                 newView.alpha = 1.0
             }
+            for (key, view) in self.viewStore {
+                if !(key == state) {
+                    view.removeFromSuperview()
+                }
+            }
         }
         
         let animationCompletion: (Bool) -> () = { (finished) in
