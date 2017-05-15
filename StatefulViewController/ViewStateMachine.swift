@@ -114,17 +114,19 @@ public class ViewStateMachine {
     public func transitionToState(_ state: ViewStateMachineState, animated: Bool = true, completion: (() -> ())? = nil) {
         lastState = state
         
-        queue.async {
-            if state == self.currentState {
+        queue.async { [weak self] in
+            guard let strongSelf = self else { return }
+
+            if state == strongSelf.currentState {
                 return
             }
             
             // Suspend the queue, it will be resumed in the completion block
-            self.queue.suspend()
-            self.currentState = state
+            strongSelf.queue.suspend()
+            strongSelf.currentState = state
             
             let c: () -> () = {
-                self.queue.resume()
+                strongSelf.queue.resume()
                 completion?()
             }
             
@@ -132,9 +134,9 @@ public class ViewStateMachine {
             DispatchQueue.main.sync {
                 switch state {
                 case .none:
-                    self.hideAllViews(animated: animated, completion: c)
+                    strongSelf.hideAllViews(animated: animated, completion: c)
                 case .view(let viewKey):
-                    self.showView(forKey: viewKey, animated: animated, completion: c)
+                    strongSelf.showView(forKey: viewKey, animated: animated, completion: c)
                 }
             }
         }
@@ -144,22 +146,27 @@ public class ViewStateMachine {
     // MARK: Private view updates
     
 	fileprivate func showView(forKey state: String, animated: Bool, completion: (() -> ())? = nil) {
-		if let newView = self.viewStore[state] {
+        let store = viewStore
+
+		if let newView = store[state] {
 			newView.alpha = animated ? 0.0 : 1.0
-			let insets = (newView as? StatefulPlaceholderView)?.placeholderViewInsets() ?? UIEdgeInsets()
-			let frame = view.frame
-			newView.frame = CGRect(x: insets.left, y: insets.top, width: frame.width - insets.left - insets.right, height: frame.height - insets.top - insets.bottom)
+
+            let insets = (newView as? StatefulPlaceholderView)?.placeholderViewInsets() ?? UIEdgeInsets()
+            let width = view.frame.width - insets.left - insets.right
+            let height = view.frame.height - insets.top - insets.bottom
+			newView.frame = CGRect(x: insets.left, y: insets.top, width: width, height: height)
+
 			view.addSubview(newView)
 		}
 
 		let animations: () -> () = {
-			if let newView = self.viewStore[state] {
+			if let newView = store[state] {
 				newView.alpha = 1.0
 			}
 		}
 
 		let animationCompletion: (Bool) -> () = { (finished) in
-			for (key, view) in self.viewStore {
+			for (key, view) in store {
 				if !(key == state) {
 					view.removeFromSuperview()
 				}
@@ -172,14 +179,16 @@ public class ViewStateMachine {
 	}
 
     fileprivate func hideAllViews(animated: Bool, completion: (() -> ())? = nil) {
+        let store = viewStore
+
         let animations: () -> () = {
-            for (_, view) in self.viewStore {
+            for (_, view) in store {
                 view.alpha = 0.0
             }
         }
         
         let animationCompletion: (Bool) -> () = { (finished) in
-            for (_, view) in self.viewStore {
+            for (_, view) in store {
                 view.removeFromSuperview()
             }
             
