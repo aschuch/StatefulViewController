@@ -143,42 +143,34 @@ public class ViewStateMachine {
     
     // MARK: Private view updates
     
-    fileprivate func showView(forKey state: String, animated: Bool, completion: (() -> ())? = nil) {
-        if let newView = self.viewStore[state] {
-            // Add new view using AutoLayout
-            newView.alpha = animated ? 0.0 : 1.0
-            newView.translatesAutoresizingMaskIntoConstraints = false
-            self.view.addSubview(newView)
+	fileprivate func showView(forKey state: String, animated: Bool, completion: (() -> ())? = nil) {
+		if let newView = self.viewStore[state] {
+			newView.alpha = animated ? 0.0 : 1.0
+			let insets = (newView as? StatefulPlaceholderView)?.placeholderViewInsets() ?? UIEdgeInsets()
+			let frame = view.frame
+			newView.frame = CGRect(x: insets.left, y: insets.top, width: frame.width - insets.left - insets.right, height: frame.height - insets.top - insets.bottom)
+			view.addSubview(newView)
+		}
 
-            let insets = (newView as? StatefulPlaceholderView)?.placeholderViewInsets() ?? UIEdgeInsets()
-            let metrics = ["top": insets.top, "bottom": insets.bottom, "left": insets.left, "right": insets.right]
-            let views = ["view": newView]
+		let animations: () -> () = {
+			if let newView = self.viewStore[state] {
+				newView.alpha = 1.0
+			}
+		}
 
-            let hConstraints = NSLayoutConstraint.constraints(withVisualFormat: "|-left-[view]-right-|", options: [], metrics: metrics, views: views)
-            let vConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-top-[view]-bottom-|", options: [], metrics: metrics, views: views)
-            self.view.addConstraints(hConstraints)
-            self.view.addConstraints(vConstraints)
-        }
-        
-        let animations: () -> () = {
-            if let newView = self.viewStore[state] {
-                newView.alpha = 1.0
-            }
-        }
-        
-        let animationCompletion: (Bool) -> () = { (finished) in
-            for (key, view) in self.viewStore {
-                if !(key == state) {
-                    view.removeFromSuperview()
-                }
-            }
-            
-            completion?()
-        }
-        
-        animateChanges(animated: animated, animations: animations, completion: animationCompletion)
-    }
-    
+		let animationCompletion: (Bool) -> () = { (finished) in
+			for (key, view) in self.viewStore {
+				if !(key == state) {
+					view.removeFromSuperview()
+				}
+			}
+
+			completion?()
+		}
+
+		animateChanges(animated: animated, animations: animations, completion: animationCompletion)
+	}
+
     fileprivate func hideAllViews(animated: Bool, completion: (() -> ())? = nil) {
         let animations: () -> () = {
             for (_, view) in self.viewStore {
