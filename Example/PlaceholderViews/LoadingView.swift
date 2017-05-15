@@ -16,7 +16,7 @@ class LoadingView: BasicPlaceholderView, StatefulPlaceholderView {
 	override func setupView() {
 		super.setupView()
 		
-		backgroundColor = UIColor.red
+		backgroundColor = UIColor.lightGray
 		
 		label.text = "Loading..."
 		label.translatesAutoresizingMaskIntoConstraints = false
@@ -38,7 +38,7 @@ class LoadingView: BasicPlaceholderView, StatefulPlaceholderView {
 	}
 
     func placeholderViewInsets() -> UIEdgeInsets {
-        return UIEdgeInsets(top: 100, left: 10, bottom: 200, right: 50)
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
 
 }

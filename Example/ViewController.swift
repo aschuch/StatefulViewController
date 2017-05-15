@@ -37,7 +37,7 @@ class ViewController: UIViewController, StatefulViewController {
     }
     
     func refresh() {
-        if (lastState == .Loading) { return }
+        if (lastState == .loading) { return }
         
         startLoading {
             print("completaion startLoading -> loadingState: \(self.currentState.rawValue)")

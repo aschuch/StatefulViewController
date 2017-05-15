@@ -41,14 +41,14 @@ extension StatefulViewController {
     
     public var currentState: StatefulViewControllerState {
         switch stateMachine.currentState {
-        case .none: return .Content
+        case .none: return .content
         case .view(let viewKey): return StatefulViewControllerState(rawValue: viewKey)!
         }
     }
     
     public var lastState: StatefulViewControllerState {
         switch stateMachine.lastState {
-        case .none: return .Content
+        case .none: return .content
         case .view(let viewKey): return StatefulViewControllerState(rawValue: viewKey)!
         }
     }
@@ -57,26 +57,26 @@ extension StatefulViewController {
     // MARK: Views
     
     public var loadingView: UIView? {
-        get { return placeholderView(.Loading) }
-        set { setPlaceholderView(newValue, forState: .Loading) }
+        get { return placeholderView(.loading) }
+        set { setPlaceholderView(newValue, forState: .loading) }
     }
     
     public var errorView: UIView? {
-        get { return placeholderView(.Error) }
-        set { setPlaceholderView(newValue, forState: .Error) }
+        get { return placeholderView(.error) }
+        set { setPlaceholderView(newValue, forState: .error) }
     }
     
     public var emptyView: UIView? {
-        get { return placeholderView(.Empty) }
-        set { setPlaceholderView(newValue, forState: .Empty) }
+        get { return placeholderView(.empty) }
+        set { setPlaceholderView(newValue, forState: .empty) }
     }
     
     
     // MARK: Transitions
     
     public func setupInitialViewState(_ completion: (() -> Void)? = nil) {
-        let isLoading = (lastState == .Loading)
-        let error: NSError? = (lastState == .Error) ? NSError(domain: "com.aschuch.StatefulViewController.ErrorDomain", code: -1, userInfo: nil) : nil
+        let isLoading = (lastState == .loading)
+        let error: NSError? = (lastState == .error) ? NSError(domain: "com.aschuch.StatefulViewController.ErrorDomain", code: -1, userInfo: nil) : nil
         transitionViewStates(loading: isLoading, error: error, animated: false, completion: completion)
     }
     
@@ -100,11 +100,11 @@ extension StatefulViewController {
         }
         
         // Update view for placeholder
-        var newState: StatefulViewControllerState = .Empty
+        var newState: StatefulViewControllerState = .empty
         if loading {
-            newState = .Loading
+            newState = .loading
         } else if let _ = error {
-            newState = .Error
+            newState = .error
         }
         self.stateMachine.transitionToState(.view(newState.rawValue), animated: animated, completion: completion)
     }
