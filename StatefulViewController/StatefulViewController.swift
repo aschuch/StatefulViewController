@@ -2,10 +2,8 @@ import UIKit
 
 /// Represents all possible states of a stateful view controller
 public enum StatefulViewControllerState: String {
-    case Content = "content"
-    case Loading = "loading"
-    case Error = "error"
-    case Empty = "empty"
+
+    case content, loading, error, empty
 }
 
 /// Protocol to provide a backing view for that stateful view controller
@@ -48,7 +46,7 @@ public protocol StatefulViewController: class, BackingViewProvider {
     /// Sets up the initial state of the view.
     /// This method should be called as soon as possible in a view or view controller's
     /// life cycle, e.g. `viewWillAppear:`, to transition to the appropriate state.
-    func setupInitialViewState(_ completion: (() -> Void)?)
+    func setupInitialViewState(completion: (() -> Void)?)
     
     /// Transitions the controller to the loading state and shows
     /// the loading view if there is no content shown already.
@@ -85,5 +83,5 @@ public protocol StatefulViewController: class, BackingViewProvider {
     /// for the user to continue browsing content.
     ///
     /// - parameter error:	The error that occured
-    func handleErrorWhenContentAvailable(_ error: Error)
+    func handleErrorWhenContentAvailable(error: Error)
 }
