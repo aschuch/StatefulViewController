@@ -16,8 +16,6 @@ class LoadingView: BasicPlaceholderView, StatefulPlaceholderView {
 	override func setupView() {
 		super.setupView()
 		
-		backgroundColor = .red
-		centerView.backgroundColor = .yellow
 		label.text = "Loading..."
 		label.translatesAutoresizingMaskIntoConstraints = false
 		centerView.addSubview(label)
