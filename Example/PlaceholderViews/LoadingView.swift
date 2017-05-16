@@ -16,8 +16,8 @@ class LoadingView: BasicPlaceholderView, StatefulPlaceholderView {
 	override func setupView() {
 		super.setupView()
 		
-		backgroundColor = UIColor.lightGray
-		
+		backgroundColor = .red
+		centerView.backgroundColor = .yellow
 		label.text = "Loading..."
 		label.translatesAutoresizingMaskIntoConstraints = false
 		centerView.addSubview(label)
@@ -28,7 +28,7 @@ class LoadingView: BasicPlaceholderView, StatefulPlaceholderView {
 		centerView.addSubview(activityIndicator)
 		
 		let views = ["label": label, "activity": activityIndicator]
-		let hConstraints = NSLayoutConstraint.constraints(withVisualFormat: "|-[activity]-[label]-|", options: [], metrics: nil, views: views)
+        let hConstraints = NSLayoutConstraint.constraints(withVisualFormat: "|-[activity]-[label]-|", options: [], metrics: nil, views: views)
 		let vConstraintsLabel = NSLayoutConstraint.constraints(withVisualFormat: "V:|[label]|", options: [], metrics: nil, views: views)
 		let vConstraintsActivity = NSLayoutConstraint.constraints(withVisualFormat: "V:|[activity]|", options: [], metrics: nil, views: views)
 

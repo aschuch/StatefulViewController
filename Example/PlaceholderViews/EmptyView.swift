@@ -16,8 +16,10 @@ class EmptyView: BasicPlaceholderView {
 		super.setupView()
 		
 		backgroundColor = UIColor.white
-		
+
 		label.text = "No Content."
+        label.numberOfLines = 0
+        label.textAlignment = .center
 		label.translatesAutoresizingMaskIntoConstraints = false
 		centerView.addSubview(label)
 		

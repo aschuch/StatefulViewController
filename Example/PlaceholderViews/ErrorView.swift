@@ -22,10 +22,14 @@ class ErrorView: BasicPlaceholderView {
 		self.addGestureRecognizer(tapGestureRecognizer)
 		
 		textLabel.text = "Something went wrong."
+        textLabel.numberOfLines = 0
+        textLabel.textAlignment = .center
 		textLabel.translatesAutoresizingMaskIntoConstraints = false
 		centerView.addSubview(textLabel)
 		
 		detailTextLabel.text = "Tap to reload"
+        detailTextLabel.numberOfLines = 0
+        detailTextLabel.textAlignment = .center
 		let fontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyle.footnote)
 		detailTextLabel.font = UIFont(descriptor: fontDescriptor, size: 0)
 		detailTextLabel.textAlignment = .center
