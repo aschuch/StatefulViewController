@@ -15,18 +15,6 @@ extension BackingViewProvider where Self: UIView {
     }
 }
 
-extension BackingViewProvider where Self: UITableViewController {
-	public var backingView: UIView {
-		return tableView
-	}
-}
-
-extension StatefulViewController where Self: UICollectionViewController {
-	public var backingView: UIView {
-		return collectionView!
-	}
-}
-
 
 // MARK: Default Implementation StatefulViewController
 

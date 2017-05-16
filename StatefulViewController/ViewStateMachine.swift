@@ -34,7 +34,23 @@ public func == (lhs: ViewStateMachineState, rhs: ViewStateMachineState) -> Bool 
 public class ViewStateMachine {
     fileprivate var viewStore: [String: UIView]
     fileprivate let queue = DispatchQueue(label: "com.aschuch.viewStateMachine.queue", attributes: [])
-    
+
+    /// An invisible container view that gets added to the view.
+    /// The placeholder views will be added to the containerView.
+    /// 
+    /// view
+    ///   \_ containerView
+    ///         \_ error | loading | empty view
+    private lazy var containerView: UIView = {
+        // Setup invisible container view.
+        // This is a workaround to make sure the placeholder views are shown in instances
+        // of UITableViewController and UICollectionViewController.
+        let containerView = PassthroughView(frame: .zero)
+        containerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        containerView.backgroundColor = .clear
+        return containerView
+    }()
+
     /// The view that should act as the superview for any added views
     public let view: UIView
     
@@ -146,6 +162,10 @@ public class ViewStateMachine {
     // MARK: Private view updates
     
 	fileprivate func showView(forKey state: String, animated: Bool, completion: (() -> ())? = nil) {
+        // Add the container view
+        containerView.frame = view.bounds
+        view.addSubview(containerView)
+
         let store = viewStore
 
 		if let newView = store[state] {
@@ -154,14 +174,14 @@ public class ViewStateMachine {
 
             // Add new view using AutoLayout
             newView.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(newView)
+            containerView.addSubview(newView)
 
             let metrics = ["top": insets.top, "bottom": insets.bottom, "left": insets.left, "right": insets.right]
             let views = ["view": newView]
             let hConstraints = NSLayoutConstraint.constraints(withVisualFormat: "|-left-[view]-right-|", options: [], metrics: metrics, views: views)
             let vConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-top-[view]-bottom-|", options: [], metrics: metrics, views: views)
-            view.addConstraints(hConstraints)
-            view.addConstraints(vConstraints)
+            containerView.addConstraints(hConstraints)
+            containerView.addConstraints(vConstraints)
 		}
 
 		let animations: () -> () = {
@@ -170,7 +190,7 @@ public class ViewStateMachine {
 			}
 		}
 
-		let animationCompletion: (Bool) -> () = { (finished) in
+		let animationCompletion: (Bool) -> () = { _ in
 			for (key, view) in store {
 				if !(key == state) {
 					view.removeFromSuperview()
@@ -192,11 +212,13 @@ public class ViewStateMachine {
             }
         }
         
-        let animationCompletion: (Bool) -> () = { (finished) in
+        let animationCompletion: (Bool) -> () = { [weak self] _ in
             for (_, view) in store {
                 view.removeFromSuperview()
             }
-            
+
+            // Remove the container view
+            self?.containerView.removeFromSuperview()
             completion?()
         }
         
@@ -209,5 +231,16 @@ public class ViewStateMachine {
         } else {
             completion?(true)
         }
+    }
+}
+
+private class PassthroughView: UIView {
+    fileprivate override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        for view in subviews {
+            if !view.isHidden && view.alpha > 0 && view.isUserInteractionEnabled && view.point(inside: convert(point, to: view), with:event) {
+                return true
+            }
+        }
+        return false
     }
 }
