@@ -30,9 +30,9 @@ Current Swift compatibility breakdown:
 
 | Swift Version | Framework Version |
 | ------------- | ----------------- |
-| 3.0	        | 3.x          	|
-| 2.3	        | 2.x          		|
-| 2.2           | 1.x          		|
+| 3.0           | 3.x               |
+| 2.3           | 2.x               |
+| 2.2           | 1.x               |
 
 [all releases]: https://github.com/aschuch/StatefulViewController/releases
 
@@ -81,13 +81,13 @@ override func viewWillAppear(animated: Bool) {
 }
 
 func loadDeliciousWines() {
-	startLoading()
+    startLoading()
 
-	let url = NSURL(string: "http://example.com/api")
-	let session = NSURLSession.sharedSession()
-	session.dataTaskWithURL(url) { (let data, let response, let error) in
-		endLoading(error: error)
-	}.resume()
+    let url = NSURL(string: "http://example.com/api")
+    let session = NSURLSession.sharedSession()
+    session.dataTaskWithURL(url) { (let data, let response, let error) in
+        endLoading(error: error)
+    }.resume()
 }
 ```
 
@@ -97,7 +97,7 @@ StatefulViewController calls the `hasContent` method to check if there is any co
 
 ```swift
 func hasContent() -> Bool {
-	return datasourceArray.count > 0
+    return datasourceArray.count > 0
 }
 ```
 
@@ -107,9 +107,9 @@ To e.g. show a custom alert or other unobtrusive error message, use `handleError
 
 ```swift
 func handleErrorWhenContentAvailable(error: ErrorType) {
-	let alertController = UIAlertController(title: "Ooops", message: "Something went wrong.", preferredStyle: .Alert)
-	alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-	self.presentViewController(alertController, animated: true, completion: nil)
+    let alertController = UIAlertController(title: "Ooops", message: "Something went wrong.", preferredStyle: .Alert)
+    alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+    presentViewController(alertController, animated: true, completion: nil)
 }
 ```
 
@@ -121,9 +121,9 @@ Per default, StatefulViewController presents all configured placeholder views fu
 
 ```swift
 class MyPlaceholderView: UIView, StatefulPlaceholderView {
-	func placeholderViewInsets() -> UIEdgeInsets {
-		return UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-  	}
+    func placeholderViewInsets() -> UIEdgeInsets {
+        return UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+    }
 }
 ```
 
@@ -146,12 +146,12 @@ stateMachine["other"] = otherView
 
 // Transition to state
 stateMachine.transitionToState(.View("loading"), animated: true) {
-	println("finished switching to loading view")
+    println("finished switching to loading view")
 }
 
 // Hide all views
 stateMachine.transitionToState(.None, animated: true) {
-	println("all views hidden now")
+    println("all views hidden now")
 }
 ```
 
