@@ -16,7 +16,7 @@ In a networked application a view controller or custom view typically has the fo
 * **Loading**: The content is currently loaded over the network.
 * **Content**: The content is available and presented to the user.
 * **Empty**: There is currently no content available to display.
-* **Error**: An error occured whilst downloading content.
+* **Error**: An error occurred whilst downloading content.
 
 As trivial as this flow may sound, there are a lot of cases that result in a rather large decision tree.
 
