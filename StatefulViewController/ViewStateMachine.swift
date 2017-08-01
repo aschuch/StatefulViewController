@@ -130,31 +130,18 @@ public class ViewStateMachine {
     public func transitionToState(_ state: ViewStateMachineState, animated: Bool = true, completion: (() -> ())? = nil) {
         lastState = state
         
-        queue.async { [weak self] in
-            guard let strongSelf = self else { return }
+        if state == currentState {
+            return
+        }
 
-            if state == strongSelf.currentState {
-                return
-            }
-            
-            // Suspend the queue, it will be resumed in the completion block
-            strongSelf.queue.suspend()
-            strongSelf.currentState = state
-            
-            let c: () -> () = {
-                strongSelf.queue.resume()
-                completion?()
-            }
-            
-            // Switch state and update the view
-            DispatchQueue.main.sync {
-                switch state {
-                case .none:
-                    strongSelf.hideAllViews(animated: animated, completion: c)
-                case .view(let viewKey):
-                    strongSelf.showView(forKey: viewKey, animated: animated, completion: c)
-                }
-            }
+        // Suspend the queue, it will be resumed in the completion block
+        currentState = state
+
+        switch state {
+        case .none:
+            hideAllViews(animated: animated, completion: completion)
+        case .view(let viewKey):
+            showView(forKey: viewKey, animated: animated, completion: completion)
         }
     }
     
