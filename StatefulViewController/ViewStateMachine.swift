@@ -125,7 +125,7 @@ public class ViewStateMachine {
     ///
     /// - parameter state:		The state to transition to
     /// - parameter animated:	true if the transition should fade views in and out
-    /// - parameter campletion:	called when all animations are finished and the view has been updated
+    /// - parameter completion:	called when all animations are finished and the view has been updated
     ///
     public func transitionToState(_ state: ViewStateMachineState, animated: Bool = true, completion: (() -> ())? = nil) {
         lastState = state
