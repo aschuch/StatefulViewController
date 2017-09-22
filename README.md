@@ -141,11 +141,11 @@ You can also use the underlying view state machine to create a similar implement
 let stateMachine = ViewStateMachine(view: view)
 
 // Add states
-stateMachine["loading"] = loadingView
-stateMachine["other"] = otherView
+stateMachine[.loading] = loadingView
+stateMachine[.other] = otherView
 
 // Transition to state
-stateMachine.transitionToState(.View("loading"), animated: true) {
+stateMachine.transitionToState(.View(.loading), animated: true) {
     println("finished switching to loading view")
 }
 
