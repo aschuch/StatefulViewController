@@ -30,14 +30,14 @@ extension StatefulViewController {
     public var currentState: StatefulViewControllerState {
         switch stateMachine.currentState {
         case .none: return .content
-        case .view(let viewKey): return StatefulViewControllerState(rawValue: viewKey)!
+        case .view(let state): return state
         }
     }
     
     public var lastState: StatefulViewControllerState {
         switch stateMachine.lastState {
         case .none: return .content
-        case .view(let viewKey): return StatefulViewControllerState(rawValue: viewKey)!
+        case .view(let state): return state
         }
     }
     
@@ -94,7 +94,7 @@ extension StatefulViewController {
         } else if let _ = error {
             newState = .error
         }
-        self.stateMachine.transitionToState(.view(newState.rawValue), animated: animated, completion: completion)
+        self.stateMachine.transitionToState(.view(newState), animated: animated, completion: completion)
     }
     
     
@@ -112,11 +112,11 @@ extension StatefulViewController {
     // MARK: Helper
     
     fileprivate func placeholderView(_ state: StatefulViewControllerState) -> UIView? {
-        return stateMachine[state.rawValue]
+        return stateMachine[state]
     }
     
     fileprivate func setPlaceholderView(_ view: UIView?, forState state: StatefulViewControllerState) {
-        stateMachine[state.rawValue] = view
+        stateMachine[state] = view
     }
 }
 

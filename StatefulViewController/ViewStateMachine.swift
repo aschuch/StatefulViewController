@@ -12,7 +12,7 @@ import UIKit
 /// Represents the state of the view state machine
 public enum ViewStateMachineState : Equatable {
     case none			// No view shown
-    case view(String)	// View with specific key is shown
+    case view(StatefulViewControllerState)	// View with specific state is shown
 }
 
 public func == (lhs: ViewStateMachineState, rhs: ViewStateMachineState) -> Bool {
@@ -28,11 +28,11 @@ public func == (lhs: ViewStateMachineState, rhs: ViewStateMachineState) -> Bool 
 /// A state machine that manages a set of views.
 ///
 /// There are two possible states:
-///		* Show a specific placeholder view, represented by a key
+///		* Show a specific placeholder view, represented by a state
 ///		* Hide all managed views
 ///
 public class ViewStateMachine {
-    fileprivate var viewStore: [String: UIView]
+    fileprivate var viewStore: [StatefulViewControllerState: UIView]
     fileprivate let queue = DispatchQueue(label: "com.aschuch.viewStateMachine.queue", attributes: [])
 
     /// An invisible container view that gets added to the view.
@@ -70,9 +70,9 @@ public class ViewStateMachine {
     ///
     /// - returns:			A view state machine with the given views for states
     ///
-    public init(view: UIView, states: [String: UIView]?) {
+    public init(view: UIView, states: [StatefulViewControllerState: UIView]?) {
         self.view = view
-        viewStore = states ?? [String: UIView]()
+        viewStore = states ?? [StatefulViewControllerState: UIView]()
     }
     
     /// - parameter view:		The view that should act as the superview for any added views
@@ -87,24 +87,24 @@ public class ViewStateMachine {
     // MARK: Add and remove view states
     
     /// - returns: the view for a given state
-    public func viewForState(_ state: String) -> UIView? {
+    public func viewForState(_ state: StatefulViewControllerState) -> UIView? {
         return viewStore[state]
     }
     
     /// Associates a view for the given state
-    public func addView(_ view: UIView, forState state: String) {
+    public func addView(_ view: UIView, forState state: StatefulViewControllerState) {
         viewStore[state] = view
     }
     
     ///  Removes the view for the given state
-    public func removeViewForState(_ state: String) {
+    public func removeViewForState(_ state: StatefulViewControllerState) {
         viewStore[state] = nil
     }
     
     
     // MARK: Subscripting
     
-    public subscript(state: String) -> UIView? {
+    public subscript(state: StatefulViewControllerState) -> UIView? {
         get {
             return viewForState(state)
         }
@@ -151,8 +151,8 @@ public class ViewStateMachine {
                 switch state {
                 case .none:
                     strongSelf.hideAllViews(animated: animated, completion: c)
-                case .view(let viewKey):
-                    strongSelf.showView(forKey: viewKey, animated: animated, completion: c)
+                case .view(let state):
+                    strongSelf.showView(forState: state, animated: animated, completion: c)
                 }
             }
         }
@@ -161,7 +161,7 @@ public class ViewStateMachine {
     
     // MARK: Private view updates
     
-	fileprivate func showView(forKey state: String, animated: Bool, completion: (() -> ())? = nil) {
+	fileprivate func showView(forState state: StatefulViewControllerState, animated: Bool, completion: (() -> ())? = nil) {
         // Add the container view
         containerView.frame = view.bounds
         view.addSubview(containerView)

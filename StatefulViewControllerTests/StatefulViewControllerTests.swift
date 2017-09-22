@@ -29,9 +29,9 @@ class StatefulViewControllerTests: XCTestCase {
         emptyView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
         emptyView.backgroundColor = UIColor.gray
         
-        stateMachine.addView(errorView, forState: "error")
-        stateMachine.addView(loadingView, forState: "loading")
-        stateMachine.addView(emptyView, forState: "empty")
+        stateMachine.addView(errorView, forState: .error)
+        stateMachine.addView(loadingView, forState: .loading)
+        stateMachine.addView(emptyView, forState: .empty)
     }
     
     override func tearDown() {
@@ -40,13 +40,13 @@ class StatefulViewControllerTests: XCTestCase {
     }
     
     func testStateMachine() {
-        stateMachine.transitionToState(.view("error"), animated: true) {
+        stateMachine.transitionToState(.view(.error), animated: true) {
             XCTAssertTrue(self.errorView.superview === self.stateMachine.view, "")
             XCTAssertNil(self.loadingView.superview, "")
             XCTAssertNil(self.emptyView.superview, "")
         }
         
-        stateMachine.transitionToState(.view("loading"), animated: true) {
+        stateMachine.transitionToState(.view(.loading), animated: true) {
             XCTAssertNil(self.errorView.superview, "")
             XCTAssertTrue(self.loadingView.superview === self.stateMachine.view, "")
             XCTAssertNil(self.emptyView.superview, "")
@@ -58,7 +58,7 @@ class StatefulViewControllerTests: XCTestCase {
             XCTAssertNil(self.emptyView.superview, "")
         }
         
-        stateMachine.transitionToState(.view("empty"), animated: true) {
+        stateMachine.transitionToState(.view(.empty), animated: true) {
             XCTAssertNil(self.errorView.superview, "")
             XCTAssertNil(self.loadingView.superview, "")
             XCTAssertFalse(self.emptyView.superview === self.stateMachine.view, "")
