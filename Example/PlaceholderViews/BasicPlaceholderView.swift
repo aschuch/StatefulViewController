@@ -33,7 +33,7 @@ class BasicPlaceholderView: UIView {
         let vConstraints = NSLayoutConstraint.constraints(withVisualFormat: "|-(>=20)-[centerView]-(>=20)-|", options: .alignAllCenterX, metrics: nil, views: ["centerView": centerView])
         let hConstraint = NSLayoutConstraint(item: centerView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0.0)
         let centerConstraint = NSLayoutConstraint(item: centerView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0.0)
-        centerConstraint.priority = 750
+        centerConstraint.priority = UILayoutPriority(rawValue: 750)
 
         addConstraints(vConstraints)
         addConstraint(hConstraint)
