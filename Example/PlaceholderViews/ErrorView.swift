@@ -30,7 +30,7 @@ class ErrorView: BasicPlaceholderView {
 		detailTextLabel.text = "Tap to reload"
         detailTextLabel.numberOfLines = 0
         detailTextLabel.textAlignment = .center
-		let fontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyle.footnote)
+        let fontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .footnote)
 		detailTextLabel.font = UIFont(descriptor: fontDescriptor, size: 0)
 		detailTextLabel.textAlignment = .center
 		detailTextLabel.textColor = UIColor.gray
