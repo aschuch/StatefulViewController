@@ -12,7 +12,7 @@ public enum StatefulViewControllerState: String {
 public protocol BackingViewProvider {
     /// The backing view, usually a UIViewController's view.
     /// All placeholder views will be added to this view instance.
-    var backingView: UIView { get }
+    var backingView: UIView! { get }
 }
 
 /// StatefulViewController protocol may be adopted by a view controller or a view in order to transition to

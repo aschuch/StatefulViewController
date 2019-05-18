@@ -52,8 +52,8 @@ public class ViewStateMachine {
     }()
 
     /// The view that should act as the superview for any added views
-    public let view: UIView
-    
+    public weak var view: UIView?
+
     /// The current display state of views
     public fileprivate(set) var currentState: ViewStateMachineState = .none
 
@@ -162,9 +162,14 @@ public class ViewStateMachine {
     // MARK: Private view updates
     
 	fileprivate func showView(forKey state: String, animated: Bool, completion: (() -> ())? = nil) {
+        guard let superview = self.view else {
+            completion?()
+            return
+        }
+
         // Add the container view
-        containerView.frame = view.bounds
-        view.addSubview(containerView)
+        containerView.frame = superview.bounds
+        superview.addSubview(containerView)
 
         let store = viewStore
 
