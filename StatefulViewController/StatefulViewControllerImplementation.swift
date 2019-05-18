@@ -4,13 +4,13 @@ import UIKit
 // MARK: Default Implementation BackingViewProvider
 
 extension BackingViewProvider where Self: UIViewController {
-    public var backingView: UIView {
+    public weak var backingView: UIView! {
         return view
     }
 }
 
 extension BackingViewProvider where Self: UIView {
-    public var backingView: UIView {
+    public weak var backingView: UIView! {
         return self
     }
 }
