@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Alexander Schuch. All rights reserved.
 //
 
+#if canImport(UIKit)
 import UIKit
-
 
 /// Represents the state of the view state machine
 public enum ViewStateMachineState : Equatable {
@@ -244,3 +244,4 @@ private class PassthroughView: UIView {
         return false
     }
 }
+#endif

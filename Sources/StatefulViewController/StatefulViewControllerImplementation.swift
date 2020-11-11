@@ -1,5 +1,5 @@
+#if canImport(UIKit)
 import UIKit
-
 
 // MARK: Default Implementation BackingViewProvider
 
@@ -133,3 +133,4 @@ private func associatedObject<T: AnyObject>(_ host: AnyObject, key: UnsafeRawPoi
     }
     return value!
 }
+#endif
