@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Alexander Schuch. All rights reserved.
 //
 
+#if canImport(UIKit)
 import UIKit
 import XCTest
 import StatefulViewController
@@ -66,3 +67,4 @@ class StatefulViewControllerTests: XCTestCase {
     }
     
 }
+#endif

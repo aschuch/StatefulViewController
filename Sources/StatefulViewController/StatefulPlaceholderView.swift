@@ -6,6 +6,7 @@
 //  Copyright © 2016 Alexander Schuch. All rights reserved.
 //
 
+#if canImport(UIKit)
 import UIKit
 
 public protocol StatefulPlaceholderView {
@@ -22,3 +23,4 @@ extension StatefulPlaceholderView {
     }
 
 }
+#endif

@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 import UIKit
 
 /// Represents all possible states of a stateful view controller
@@ -87,3 +88,4 @@ public protocol StatefulViewController: class, BackingViewProvider {
     /// - parameter error:	The error that occurred
     func handleErrorWhenContentAvailable(_ error: Error)
 }
+#endif

@@ -34,7 +34,7 @@ class TableViewController: UITableViewController, StatefulViewController {
         refresh()
     }
 
-    func refresh() {
+    @objc func refresh() {
         if (lastState == .loading) { return }
 
         startLoading {

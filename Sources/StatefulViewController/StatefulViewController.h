@@ -6,7 +6,9 @@
 //  Copyright (c) 2015 Alexander Schuch. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#if canImport(UIKit)
+    #import <UIKit/UIKit.h>
+#endif
 
 //! Project version number for StatefulViewController.
 FOUNDATION_EXPORT double StatefulViewControllerVersionNumber;
